@@ -6,7 +6,7 @@
   left: 0;
   right: 0;
 
-  background-color: transparent;
+  background-color: white;
   height: $navbar-height;
   border-radius: 0;
   z-index: $zindex-navbar;
@@ -98,7 +98,7 @@
 
 
 // Topbar left
-// 
+//
 .topbar-left {
   display: flex;
   align-items: center;
@@ -235,7 +235,7 @@
 
 
   // 2 Cols
-  // 
+  //
   &.cols-2 {
     display: flex;
     flex-wrap: wrap;
@@ -449,7 +449,7 @@
 .topbar-reveal {
 
  //overflow: hidden;
-  
+
   .topbar {
     height: 0;
   }

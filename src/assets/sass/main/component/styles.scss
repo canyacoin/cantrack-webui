@@ -13,7 +13,6 @@
 
 @import "./src/assets/sass/theme/utility/spacing";
 @import "./src/assets/sass/theme/content/typography";
-@import "./src/assets/sass/theme/uikit/counter";
 @import "./src/assets/sass/theme/layout/scafolding";
 @import "./src/assets/sass/theme/layout/footer";
 @import "./src/assets/sass/theme/uikit/button";
@@ -36,43 +35,6 @@
   min-height: 60vh;
 }
 
-.global-time {
-  > nav {
-    @include make-container;
-    padding-top: get-spacer(2);
-    padding-bottom: get-spacer(2);
-    text-align: right;
-  }
-
-  .counter, .actions {
-    @include flex-column-center;
-    min-height: 210px;
-  }
-  .counter {
-
-  }
-  .actions {
-    .timer-trigger {
-      font-size: $h1-font-size;
-      &:hover {
-        cursor: pointer;
-      }
-    }
-    .play {
-      color: $green;
-      &:hover {
-        color: darken($green, 7%);
-      }
-    }
-    .stop {
-      color: $danger;
-      &:hover {
-        color: darken($danger, 7%);
-      }
-    }
-  }
+.task-row {
+  @include normalize-text;
 }
-
-
-
-

@@ -1,0 +1,18 @@
+@import "./src/assets/sass/canya-time-tracker";
+
+.task-list-wrapper {
+  @include make-container;
+  padding-bottom: get-spacer(3);
+}
+
+.task-list {
+  border-radius: $border-radius;
+  border: 1px solid $gray-100;
+}
+
+
+
+
+
+
+

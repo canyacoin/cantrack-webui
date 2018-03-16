@@ -1,0 +1,49 @@
+@import "./src/assets/sass/canya-time-tracker";
+
+.task {
+
+}
+
+.task-row {
+  @include flex-row;
+  border-bottom: 1px solid $gray-100;
+  > div {
+    border-right: 1px solid $gray-100;
+    border-left: 1px solid $gray-100;
+    padding: get-spacer(2);
+    &:first-child {
+      border-left: none;
+    }
+    &:last-child {
+      border-right: none;
+    }
+  }
+  .actions,
+  .time,
+  .description {
+  }
+  .actions,
+  .time {
+    text-align: center;
+  }
+  .actions {
+    width: 56px;
+  }
+  .time {
+    width: 140px;
+  }
+  .description {
+    flex-grow: 1;
+  }
+  .timer-trigger {
+    &:hover {
+      cursor: pointer;
+    }
+    &.play {
+      &:hover,
+      &.active {
+        color: $success;
+      }
+    }
+  }
+}

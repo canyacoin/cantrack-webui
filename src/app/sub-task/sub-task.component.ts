@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { TimerService } from '../timer.service';
 
 @Component({
   selector: 'app-sub-task',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubTaskComponent implements OnInit {
 
-  constructor() { }
+  @Input() localTimer: TimerService;
+
+  constructor(public globalTimer: TimerService) {
+    this.localTimer = new TimerService;
+  }
 
   ngOnInit() {
   }

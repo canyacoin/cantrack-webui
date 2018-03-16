@@ -1,10 +1,10 @@
 <article class="task">
   <div class="task-row">
     <div class="actions">
-      <span class="timer-trigger play"><i class="fa fa-play-circle"></i></span>
+      <app-timer-trigger size="small" *ngIf="localTimer" [timer]="localTimer"></app-timer-trigger>
     </div>
     <div class="time">
-      <span>00:00:00:00</span>
+      <span>{{ localTimer.counter.days }}:{{ localTimer.counter.hours }}:{{ localTimer.counter.minutes }}:{{ localTimer.counter.seconds }}</span>
     </div>
     <div class="description">
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>

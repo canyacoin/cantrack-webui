@@ -1,0 +1,8 @@
+<span
+  class="timer-trigger play {{ size }}"
+  (click)="timer.onTimerStart()"
+  *ngIf="!timer.counter.isOn"><i class="fa fa-play-circle"></i></span>
+<span
+  class="timer-trigger stop {{ size }}"
+  (click)="timer.onTimerStop()"
+  *ngIf="timer.counter.isOn"><i class="fa fa-stop-circle"></i></span>

@@ -9,6 +9,8 @@ import { TimerComponent } from './timer/timer.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskComponent } from './task/task.component';
 import { SubTaskComponent } from './sub-task/sub-task.component';
+import { TimerService } from './timer.service';
+import { TimerTriggerComponent } from './timer-trigger/timer-trigger.component';
 
 
 @NgModule({
@@ -19,12 +21,13 @@ import { SubTaskComponent } from './sub-task/sub-task.component';
     TimerComponent,
     TaskListComponent,
     TaskComponent,
-    SubTaskComponent
+    SubTaskComponent,
+    TimerTriggerComponent
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [TimerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

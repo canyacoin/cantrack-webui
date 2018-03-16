@@ -1,0 +1,24 @@
+@import "./src/assets/sass/canya-time-tracker";
+
+.timer-trigger {
+  font-size: $h1-font-size;
+  &:hover {
+    cursor: pointer;
+  }
+  &.play {
+    color: $green;
+    &:hover {
+      color: darken($green, 7%);
+    }
+  }
+  &.stop {
+    color: $danger;
+    &:hover {
+      color: darken($danger, 7%);
+    }
+  }
+  &.small {
+    font-size: $font-size-base;
+    color: $body-color;
+  }
+}

@@ -5,7 +5,6 @@
     @include make-container;
     padding-top: get-spacer(2);
     padding-bottom: get-spacer(2);
-    text-align: right;
   }
 
   .counter, .actions {

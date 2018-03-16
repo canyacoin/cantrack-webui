@@ -7,13 +7,15 @@
   }
   &.play {
     color: $green;
-    &:hover {
+    &:hover,
+    &.active {
       color: darken($green, 7%);
     }
   }
   &.stop {
     color: $danger;
-    &:hover {
+    &:hover,
+    &.active {
       color: darken($danger, 7%);
     }
   }

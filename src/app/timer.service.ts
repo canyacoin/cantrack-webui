@@ -3,9 +3,12 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class TimerService {
 
+  localTimers = [];
+
   counter = {
     intervalFn: null,
     isOn: false,
+    isLocalTimer: false,
     prev: 0,
     days: 0,
     hours: 0,
@@ -16,18 +19,35 @@ export class TimerService {
   constructor() { }
 
   onTimerStart() {
+    this.counter.isOn = true;
     this.countUp();
+
+    return this;
   }
 
   onTimerStop() {
-    this.counter.isOn = !this.counter.isOn;
+    this.counter.isOn = false;
     clearInterval(this.counter.intervalFn);
+
+    return this;
+  }
+
+  stopLocalTimers() {
+    this.localTimers.forEach(timer => {
+      timer.onTimerStop();
+    });
+
+    return this;
+  }
+
+  addLocalTimer(timer: TimerService) {
+    this.localTimers.push(timer);
+
+    return this;
   }
 
   countUp() {
     let counter = this.counter;
-
-    counter.isOn = !counter.isOn;
 
     const second = 1000,
           minute = second * 60,
@@ -47,6 +67,8 @@ export class TimerService {
         counter.seconds = Math.floor((distance % (minute)) / second);
 
     }, second);
+
+    return this;
   }
 
 }

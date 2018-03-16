@@ -13,6 +13,8 @@ export class TaskComponent implements OnInit {
 
   constructor(public globalTimer: TimerService) {
     this.localTimer = new TimerService;
+    this.localTimer.counter.isLocalTimer = true;
+    this.globalTimer.addLocalTimer(this.localTimer);
   }
 
   ngOnInit() {

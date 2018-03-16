@@ -1,0 +1,24 @@
+@import "./src/assets/sass/canya-time-tracker";
+
+.example-class {
+  color: #FFF;
+}
+
+/*
+  Media queries
+*/
+@media #{$xs-only} {}
+@media #{$sm-only} {}
+@media #{$md-only} {}
+@media #{$lg-only} {}
+@media #{$sm-down} {
+  body {}
+}
+@media #{$md-down} {}
+@media #{$lg-down} {}
+@media #{$sm-up} {}
+@media #{$md-up} {}
+@media #{$lg-up} {}
+@media #{$xl-up} {}
+@media #{$xxl-up} {}
+

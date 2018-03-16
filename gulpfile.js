@@ -65,8 +65,16 @@ cssTaskDictionary.forEach(taskDef => {
   // if (process.env.ENV == 'prod' || process.env.ENV == 'dev') {
   // }
 
-  // Sass will watch for changes in these actions
+  // Sass will wat0 ch for changes in these actions
   let srcPathFile = path.join(cssSrcPath, taskDef.module, taskDef.ctrl, taskDef.action);
+  let destination;
+
+  if (taskDef.module == 'main') {
+    destination = path.join(publicFolder);
+  } else {
+    destination = path.join(cssDest, taskDef.module, taskDef.ctrl);
+  }
+
 
   gulp.task(taskName, () => {
     gulp.src([srcPathFile])
@@ -76,7 +84,7 @@ cssTaskDictionary.forEach(taskDef => {
         cascade: false,
         flexbox: true,
         }))
-      .pipe(gulp.dest(path.join(cssDest, taskDef.module, taskDef.ctrl))
+      .pipe(gulp.dest(destination)
     );
   });
 

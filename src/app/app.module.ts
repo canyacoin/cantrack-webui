@@ -28,6 +28,7 @@ import { TimerTriggerComponent } from './timer-trigger/timer-trigger.component';
     BrowserModule
   ],
   providers: [TimerService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [TaskComponent, SubTaskComponent]
 })
 export class AppModule { }

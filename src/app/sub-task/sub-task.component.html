@@ -7,7 +7,18 @@
       <span>{{ localTimer.counter.days }}:{{ localTimer.counter.hours }}:{{ localTimer.counter.minutes }}:{{ localTimer.counter.seconds }}</span>
     </div>
     <div class="description">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+      <textarea
+        (keyup.enter)="onEnter($event)"
+        (keydown.tab)="onEnter($event)"
+        [(ngModel)]="description"
+        rows="1"
+        class="form-control form-control-sm"></textarea>
+    </div>
+    <div class="add-remove">
+      <div>
+        <span class="add" (click)="add()"><i class="fa fa-plus-circle"></i></span>
+        <span class="remove" (click)="remove()"><i class="fa fa-minus-circle"></i></span>
+      </div>
     </div>
   </div>
 </div>

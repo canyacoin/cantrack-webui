@@ -33,7 +33,6 @@
 .time-tracker-wrapper {
   border-radius: $border-radius-lg;
   background-color: white;
-  min-height: 60vh;
 }
 
 .task-row {
@@ -41,7 +40,67 @@
 }
 
 .task-row {
+  @include flex-row;
+  border-bottom: 1px solid $gray-100;
+  > div {
+    border-right: 1px solid $gray-100;
+    border-left: 1px solid $gray-100;
+    &:first-child {
+      border-left: none;
+    }
+    &:last-child {
+      border-right: none;
+    }
+  }
+  .actions,
+  .time,
+  .description {
+  }
+  .actions,
+  .time,
+  .add-remove {
+    @include flex-column-center;
+    text-align: center;
+  }
+  .add-remove {
+    min-width: 56px;
+    span {
+      &.add {
+        &:hover {
+          color: $green;
+        }
+      }
+      &.remove {
+        &:hover {
+          color: $red;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .actions {
+  }
+  .time {
+  }
+  .description {
+    flex-grow: 1;
+    padding: 0;
+  }
+  .timer-trigger {
+    &:hover {
+      cursor: pointer;
+    }
+    &.play {
+      &:hover,
+      &.active {
+        color: $success;
+      }
+    }
+  }
   .form-control {
+    border-radius: 0;
     border: none;
     &:focus,
     &:blur {

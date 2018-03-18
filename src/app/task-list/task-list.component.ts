@@ -13,7 +13,9 @@ export class TaskListComponent implements OnInit {
 
   taskRef: ComponentRef<any>
 
-  tasks = []
+  tasks = {}
+
+  prevTaskIndex = 0
 
   constructor(private resolver: ComponentFactoryResolver) { }
 
@@ -30,7 +32,19 @@ export class TaskListComponent implements OnInit {
 
     this.taskRef.instance.taskList = this;
 
+    this.taskRef.instance.id = this.prevTaskIndex;
+
+    this.taskRef.location.nativeElement.querySelector('textarea').focus();
+
+    this.tasks[this.prevTaskIndex] = this.taskRef;
+
+    this.prevTaskIndex++;
+
     // this.taskRef.instance.output.subscribe(event => console.log(event));
+  }
+
+  removeTask(id: number) {
+    this.tasks[id].destroy();
   }
 
 }

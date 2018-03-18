@@ -22,7 +22,11 @@ export class TaskComponent implements OnInit {
 
   time: number
 
-  subTasks = []
+  id: number
+
+  subTasks = {}
+
+  prevSubTaskIndex = 0
 
   constructor(
     public globalTimer: TimerService,
@@ -41,18 +45,36 @@ export class TaskComponent implements OnInit {
 
     this.subTaskRef = this.container.createComponent(factory);
 
-    // this.subTaskRef.instance.taskList = this;
+    this.subTaskRef.instance.parentTask = this;
+
+    this.subTaskRef.instance.id = this.prevSubTaskIndex;
+
+    this.subTaskRef.location.nativeElement.querySelector('textarea').focus();
+
+    this.subTasks[this.prevSubTaskIndex] = this.subTaskRef;
+
+    this.prevSubTaskIndex++;
 
     // this.taskRef.instance.output.subscribe(event => console.log(event));
   }
 
+  add() {
+    this.taskList.createTask();
+  }
+
+  remove() {
+    this.taskList.removeTask(this.id);
+  }
+
+  removeSubTask(id: number) {
+    this.subTasks[id].destroy();
+  }
+
   onEnter(e) {
-    console.log(e);
     this.taskList.createTask();
   }
 
   onTab(e) {
-    console.log(e);
     this.createSubTask();
   }
 

@@ -6,13 +6,18 @@ import { TimerService } from '../timer.service';
   templateUrl: './sub-task.component.html',
   styleUrls: ['./sub-task.component.css']
 })
+
 export class SubTaskComponent implements OnInit {
 
   @Input() localTimer: TimerService
 
+  parentTask: any;
+
   description: string
 
   time: number
+
+  id: number
 
   constructor(public globalTimer: TimerService) {
     this.localTimer = new TimerService;
@@ -21,6 +26,18 @@ export class SubTaskComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onEnter(e) {
+    this.parentTask.createSubTask();
+  }
+
+  add() {
+    this.parentTask.createSubTask();
+  }
+
+  remove() {
+    this.parentTask.removeSubTask(this.id);
   }
 
 }

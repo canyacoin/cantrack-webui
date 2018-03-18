@@ -10,16 +10,18 @@
       <textarea
         (keyup.enter)="onEnter($event)"
         (keydown.tab)="onTab($event)"
-        name=""
-        id=""
+        [(ngModel)]="description"
         rows="1"
         class="form-control"
-        autofocus="autofocus"
         placeholder="Start typing your first task. Press tab to add a sub-task or enter to add a new task."></textarea>
+    </div>
+    <div class="add-remove">
+      <div>
+        <span class="add" (click)="add()"><i class="fa fa-plus-circle"></i></span>
+        <span class="remove" *ngIf="id != 0" (click)="remove()"><i class="fa fa-minus-circle"></i></span>
+      </div>
     </div>
   </div>
 
   <template #subTask></template>
-  <!-- <app-sub-task></app-sub-task>
-  <app-sub-task></app-sub-task> -->
 </article>

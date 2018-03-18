@@ -5,7 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
 })
+
 export class TaskListComponent implements OnInit {
+
+  tasks = []
 
   constructor() { }
 

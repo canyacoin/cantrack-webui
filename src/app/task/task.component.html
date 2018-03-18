@@ -7,7 +7,15 @@
       <span>{{ localTimer.counter.days }}:{{ localTimer.counter.hours }}:{{ localTimer.counter.minutes }}:{{ localTimer.counter.seconds }}</span>
     </div>
     <div class="description">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+      <textarea
+        (keyup.enter)="onEnter($event)"
+        (keydown.tab)="onTab($event)"
+        name=""
+        id=""
+        rows="1"
+        class="form-control"
+        autofocus="autofocus"
+        placeholder="Start typing your first task. Press tab to add a sub-task or enter to add a new task."></textarea>
     </div>
   </div>
 

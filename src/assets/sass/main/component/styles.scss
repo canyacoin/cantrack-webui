@@ -4,6 +4,7 @@
 @import "./node_modules/bootstrap/scss/print";
 @import "./node_modules/bootstrap/scss/type";
 @import "./node_modules/bootstrap/scss/buttons";
+@import "./node_modules/bootstrap/scss/forms";
 @import "./node_modules/bootstrap/scss/bootstrap-grid";
 @import "./node_modules/bootstrap/scss/utilities";
 
@@ -37,4 +38,14 @@
 
 .task-row {
   @include normalize-text;
+}
+
+.task-row {
+  .form-control {
+    border: none;
+    &:focus,
+    &:blur {
+      border: none;
+    }
+  }
 }

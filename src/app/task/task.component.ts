@@ -9,7 +9,15 @@ import { TimerService } from '../timer.service';
 
 export class TaskComponent implements OnInit {
 
-  @Input() localTimer: TimerService;
+  @Input() localTimer: TimerService
+
+  @Input() taskList: any
+
+  description: string
+
+  time: number
+
+  subTasks = []
 
   constructor(public globalTimer: TimerService) {
     this.localTimer = new TimerService;
@@ -18,6 +26,15 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.taskList.tasks);
+  }
+
+  onEnter(e) {
+    console.log(e);
+  }
+
+  onTab(e) {
+    console.log(e);
   }
 
 }

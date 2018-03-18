@@ -8,7 +8,11 @@ import { TimerService } from '../timer.service';
 })
 export class SubTaskComponent implements OnInit {
 
-  @Input() localTimer: TimerService;
+  @Input() localTimer: TimerService
+
+  description: string
+
+  time: number
 
   constructor(public globalTimer: TimerService) {
     this.localTimer = new TimerService;

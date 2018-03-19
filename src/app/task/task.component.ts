@@ -22,6 +22,8 @@ export class TaskComponent implements OnInit {
 
   id: number
 
+  time: number = 0
+
   subTasks = {}
 
   prevSubTaskIndex = 0
@@ -31,10 +33,19 @@ export class TaskComponent implements OnInit {
     private resolver: ComponentFactoryResolver) {
     this.localTimer = new TimerService;
     this.localTimer.counter.isLocalTimer = true;
+    this.localTimer.task = this;
     this.globalTimer.addLocalTimer(this.localTimer);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.setCurrentTime();
+  }
+
+  setCurrentTime() {
+    let tasks = JSON.parse(localStorage.getItem('taskList')).tasks;
+    this.localTimer.counter.prev = tasks[this.id].time;
+    this.localTimer.setTime();
+  }
 
   createSubTask() {
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(SubTaskComponent);
@@ -64,8 +75,21 @@ export class TaskComponent implements OnInit {
     this.subTasks[id].destroy();
   }
 
+  updateLocalTime(time) {
+    let tasks = JSON.parse(localStorage.getItem('taskList')).tasks;
+
+    let task = tasks[this.id];
+
+    task.time = time;
+
+    this.time = time;
+
+    localStorage.setItem('taskList', JSON.stringify({tasks: tasks}));
+  }
+
   onKeyUp(e) {
     let tasks = JSON.parse(localStorage.getItem('taskList')).tasks;
+
     let task = tasks[this.id];
 
     task.description = this.description;

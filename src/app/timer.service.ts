@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
 
+const second = 1000,
+      minute = second * 60,
+      hour = minute * 60,
+      day = hour * 24;
+
 @Injectable()
 export class TimerService {
 
@@ -16,10 +21,13 @@ export class TimerService {
     seconds: 0,
   }
 
+  task: any;
+
   constructor() { }
 
   onTimerStart() {
     this.counter.isOn = true;
+
     this.countUp();
 
     return this;
@@ -27,6 +35,7 @@ export class TimerService {
 
   onTimerStop() {
     this.counter.isOn = false;
+
     clearInterval(this.counter.intervalFn);
 
     return this;
@@ -46,25 +55,29 @@ export class TimerService {
     return this;
   }
 
-  countUp() {
+  setTime() {
     let counter = this.counter;
 
-    const second = 1000,
-          minute = second * 60,
-          hour = minute * 60,
-          day = hour * 24;
+    let task = this.task;
 
-    let prev = 0;
+    if (task) task.updateLocalTime(counter.prev);
 
-    counter.intervalFn = setInterval(function() {
+    let distance = counter.prev;
 
-        counter.prev += second;
-        let distance = counter.prev;
+    counter.days = Math.floor(distance / (day)),
+    counter.hours = Math.floor((distance % (day)) / (hour)),
+    counter.minutes = Math.floor((distance % (hour)) / (minute)),
+    counter.seconds = Math.floor((distance % (minute)) / second);
+  }
 
-        counter.days = Math.floor(distance / (day)),
-        counter.hours = Math.floor((distance % (day)) / (hour)),
-        counter.minutes = Math.floor((distance % (hour)) / (minute)),
-        counter.seconds = Math.floor((distance % (minute)) / second);
+  countUp() {
+    let timer = this;
+
+    this.counter.intervalFn = setInterval(function() {
+
+      timer.counter.prev += second;
+
+      timer.setTime();
 
     }, second);
 

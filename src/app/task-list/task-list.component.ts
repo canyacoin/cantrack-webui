@@ -58,22 +58,27 @@ export class TaskListComponent implements OnInit {
                                         this.localTaskList.tasks[this.prevTaskIndex].description :
                                         '';
 
+    this.taskRef.instance.time = this.localTaskList.tasks[this.prevTaskIndex] ?
+                                this.localTaskList.tasks[this.prevTaskIndex].time :
+                                0;
+
     this.taskRef.location.nativeElement.querySelector('textarea').focus();
 
     this.tasks[this.prevTaskIndex] = this.taskRef;
 
     this.prevTaskIndex++;
 
-    this.storeEmptyTask();
+    this.storeTask();
   }
 
-  storeEmptyTask() {
+  storeTask() {
     let taskList = JSON.parse(localStorage.getItem('taskList'));
 
     taskList.tasks[this.taskRef.instance.id] = {
       id: this.taskRef.instance.id,
       description: this.taskRef.instance.description,
-      subTasks: {}
+      subTasks: {},
+      time: this.taskRef.instance.time,
     }
 
     localStorage.setItem('taskList', JSON.stringify({tasks: taskList.tasks}));

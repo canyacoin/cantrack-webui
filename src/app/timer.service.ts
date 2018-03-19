@@ -10,8 +10,9 @@ export class TimerService {
 
   localTimers = [];
 
+  intervalFn: any;
+
   counter = {
-    intervalFn: null,
     isOn: false,
     isLocalTimer: false,
     prev: 0,
@@ -21,9 +22,30 @@ export class TimerService {
     seconds: 0,
   }
 
-  task: any;
+  task: any
 
-  constructor() { }
+  globalTimer: any
+
+  localStorageName: string = 'globalTimer';
+
+  constructor() {
+    this.globalTimer = localStorage.getItem(this.localStorageName) ?
+                      JSON.parse(localStorage.getItem(this.localStorageName)) :
+                      null;
+
+
+    if (!this.globalTimer) {
+      this.updateGlobalTimer({counter: this.counter});
+    } else {
+      this.globalTimer.counter.isOn = false;
+      this.counter = this.globalTimer.counter;
+    }
+  }
+
+  updateGlobalTimer(data) {
+    localStorage.setItem(this.localStorageName, JSON.stringify(data));
+    this.globalTimer = JSON.parse(localStorage.getItem(this.localStorageName));
+  }
 
   onTimerStart() {
     this.counter.isOn = true;
@@ -36,7 +58,11 @@ export class TimerService {
   onTimerStop() {
     this.counter.isOn = false;
 
-    clearInterval(this.counter.intervalFn);
+    clearInterval(this.intervalFn);
+
+    if (!this.counter.isLocalTimer) {
+      this.updateGlobalTimer({counter: this.counter});
+    }
 
     return this;
   }
@@ -68,12 +94,16 @@ export class TimerService {
     counter.hours = Math.floor((distance % (day)) / (hour)),
     counter.minutes = Math.floor((distance % (hour)) / (minute)),
     counter.seconds = Math.floor((distance % (minute)) / second);
+
+    if (!this.counter.isLocalTimer) {
+      this.updateGlobalTimer({counter: counter});
+    }
   }
 
   countUp() {
     let timer = this;
 
-    this.counter.intervalFn = setInterval(function() {
+    this.intervalFn = setInterval(function() {
 
       timer.counter.prev += second;
 

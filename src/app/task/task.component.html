@@ -10,10 +10,11 @@
       <textarea
         (keyup.enter)="onEnter($event)"
         (keydown.tab)="onTab($event)"
+        (keyup)="onKeyUp($event)"
         [(ngModel)]="description"
         rows="1"
         class="form-control"
-        placeholder="Start typing your first task. Press tab to add a sub-task or enter to add a new task."></textarea>
+        placeholder="Type a task. Press tab to add a sub-task or enter to add a new task."></textarea>
     </div>
     <div class="add-remove">
       <div>

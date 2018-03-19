@@ -18,19 +18,23 @@ export class TimerTriggerComponent implements OnInit {
 
   play(timer) {
     this.globalTimer.stopLocalTimers();
+
     if (timer.counter.isLocalTimer) {
       this.globalTimer
         .onTimerStop()
         .onTimerStart();
     }
+
     timer.onTimerStart();
   }
 
   stop(timer) {
     this.globalTimer.stopLocalTimers();
+
     if (timer.counter.isLocalTimer) {
       this.globalTimer.onTimerStop();
     }
+
     timer.onTimerStop();
   }
 

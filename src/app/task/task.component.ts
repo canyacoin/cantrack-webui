@@ -18,9 +18,7 @@ export class TaskComponent implements OnInit {
 
   taskList: any
 
-  description: string
-
-  time: number
+  description: string = ''
 
   id: number
 
@@ -39,8 +37,6 @@ export class TaskComponent implements OnInit {
   ngOnInit() {}
 
   createSubTask() {
-    // this.container.clear();
-
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(SubTaskComponent);
 
     this.subTaskRef = this.container.createComponent(factory);
@@ -54,8 +50,6 @@ export class TaskComponent implements OnInit {
     this.subTasks[this.prevSubTaskIndex] = this.subTaskRef;
 
     this.prevSubTaskIndex++;
-
-    // this.taskRef.instance.output.subscribe(event => console.log(event));
   }
 
   add() {
@@ -70,11 +64,22 @@ export class TaskComponent implements OnInit {
     this.subTasks[id].destroy();
   }
 
+  onKeyUp(e) {
+    let tasks = JSON.parse(localStorage.getItem('taskList')).tasks;
+    let task = tasks[this.id];
+
+    task.description = this.description;
+
+    localStorage.setItem('taskList', JSON.stringify({tasks: tasks}));
+  }
+
   onEnter(e) {
+    e.preventDefault();
     this.taskList.createTask();
   }
 
   onTab(e) {
+    e.preventDefault();
     this.createSubTask();
   }
 

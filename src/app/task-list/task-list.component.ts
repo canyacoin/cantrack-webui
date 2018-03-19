@@ -17,15 +17,35 @@ export class TaskListComponent implements OnInit {
 
   prevTaskIndex = 0
 
-  constructor(private resolver: ComponentFactoryResolver) { }
+  localTaskList: any;
+
+  constructor(private resolver: ComponentFactoryResolver) {
+    this.localTaskList = localStorage.getItem('taskList') ? JSON.parse(localStorage.getItem('taskList')) : null;
+
+    if (!this.localTaskList) {
+      localStorage.setItem('taskList', JSON.stringify({tasks: {}}));
+      this.updateLocalTaskList();
+    }
+  }
 
   ngOnInit() {
-    this.createTask();
+    this.loadLocalTasks();
+  }
+
+  loadLocalTasks() {
+    let keys = Object.keys(this.localTaskList.tasks);
+
+    if (keys.length === 0) {
+      this.createTask();
+    } else {
+      keys.forEach(key => {
+        this.prevTaskIndex = this.localTaskList.tasks[key].id;
+        this.createTask();
+      });
+    }
   }
 
   createTask() {
-    // this.container.clear();
-
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(TaskComponent);
 
     this.taskRef = this.container.createComponent(factory);
@@ -34,19 +54,40 @@ export class TaskListComponent implements OnInit {
 
     this.taskRef.instance.id = this.prevTaskIndex;
 
+    this.taskRef.instance.description = this.localTaskList.tasks[this.prevTaskIndex] ?
+                                        this.localTaskList.tasks[this.prevTaskIndex].description :
+                                        '';
+
     this.taskRef.location.nativeElement.querySelector('textarea').focus();
 
     this.tasks[this.prevTaskIndex] = this.taskRef;
 
     this.prevTaskIndex++;
 
-    // this.taskRef.instance.output.subscribe(event => console.log(event));
+    this.storeEmptyTask();
+  }
+
+  storeEmptyTask() {
+    let taskList = JSON.parse(localStorage.getItem('taskList'));
+
+    taskList.tasks[this.taskRef.instance.id] = {
+      id: this.taskRef.instance.id,
+      description: this.taskRef.instance.description,
+      subTasks: {}
+    }
+
+    localStorage.setItem('taskList', JSON.stringify({tasks: taskList.tasks}));
+
+    this.updateLocalTaskList();
+  }
+
+  updateLocalTaskList() {
+    this.localTaskList = JSON.parse(localStorage.getItem('taskList'));
   }
 
   removeTask(id: number) {
     this.tasks[id].destroy();
   }
-
 }
 
 

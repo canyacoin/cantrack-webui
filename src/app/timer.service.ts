@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 
 const second = 1000,
       minute = second * 60,
@@ -28,17 +28,18 @@ export class TimerService {
 
   localStorageName: string = 'globalTimer';
 
-  constructor() {
-    this.globalTimer = localStorage.getItem(this.localStorageName) ?
-                      JSON.parse(localStorage.getItem(this.localStorageName)) :
-                      null;
+  constructor(@Optional() isLocalTimer: boolean = false) {
+    if (!isLocalTimer) {
+      this.globalTimer = localStorage.getItem(this.localStorageName) ?
+                        JSON.parse(localStorage.getItem(this.localStorageName)) :
+                        null;
 
-
-    if (!this.globalTimer) {
-      this.updateGlobalTimer({counter: this.counter});
-    } else {
-      this.globalTimer.counter.isOn = false;
-      this.counter = this.globalTimer.counter;
+      if (!this.globalTimer) {
+        this.updateGlobalTimer({counter: this.counter});
+      } else {
+        this.globalTimer.counter.isOn = false;
+        this.counter = this.globalTimer.counter;
+      }
     }
   }
 

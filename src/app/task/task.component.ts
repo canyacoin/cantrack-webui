@@ -31,7 +31,7 @@ export class TaskComponent implements OnInit {
   constructor(
     public globalTimer: TimerService,
     private resolver: ComponentFactoryResolver) {
-    this.localTimer = new TimerService;
+    this.localTimer = new TimerService(true);
     this.localTimer.counter.isLocalTimer = true;
     this.localTimer.task = this;
     this.globalTimer.addLocalTimer(this.localTimer);

@@ -20,7 +20,7 @@ export class SubTaskComponent implements OnInit {
   id: number
 
   constructor(public globalTimer: TimerService) {
-    this.localTimer = new TimerService;
+    this.localTimer = new TimerService(true);
     this.localTimer.counter.isLocalTimer = true;
     this.globalTimer.addLocalTimer(this.localTimer);
   }
@@ -29,6 +29,7 @@ export class SubTaskComponent implements OnInit {
   }
 
   onEnter(e) {
+    e.preventDefault();
     this.parentTask.createSubTask();
   }
 

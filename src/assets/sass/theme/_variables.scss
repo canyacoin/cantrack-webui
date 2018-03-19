@@ -48,13 +48,13 @@ $font-icon-themify:     themify;
 //
 
 // Context colors
-$color-primary:          #0facf3 !default;
-$color-secondary:        #e4e7ea !default;
-$color-success:          #46da60 !default;
-$color-info:             #0e97ff !default;
-$color-warning:          #ffbe00 !default;
-$color-danger:           #ff4954 !default;
-$color-dark:             #000000 !default;
+$color-primary:          theme-color('primary') !default;
+$color-secondary:        theme-color('secondary') !default;
+$color-success:          theme-color('success') !default;
+$color-info:             theme-color('info') !default;
+$color-warning:          theme-color('warning') !default;
+$color-danger:           theme-color('danger') !default;
+$color-dark:             theme-color('dark') !default;
 
 
 // Pale context colors

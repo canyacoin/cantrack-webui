@@ -111,3 +111,19 @@
     }
   }
 }
+
+.project-name {
+  background-color: transparent;
+  margin-bottom: get-spacer(3);
+  font-size: $h1-font-size;
+  font-weight: 600;
+  box-shadow: none;
+  border-radius: 0;
+  border: none;
+  padding: 0;
+  &:focus {
+    background-color: $gray-200;
+    border-radius: 0;
+    border: none;
+  }
+}

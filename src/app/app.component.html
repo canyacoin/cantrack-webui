@@ -1,7 +1,13 @@
-<app-header></app-header>
+<app-header class="d-print-none"></app-header>
 
 <main class="site-wrapper" role="main">
   <div class="container">
+    <input
+      (ngModel)="projectName"
+      (keyup)="onKeyUp($event)"
+      type="text"
+      class="form-control form-control-lg project-name"
+      value="{{ projectName }}">
     <section class="time-tracker-wrapper">
 
       <app-timer></app-timer>

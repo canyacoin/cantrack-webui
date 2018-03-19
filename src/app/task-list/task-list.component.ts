@@ -36,13 +36,13 @@ export class TaskListComponent implements OnInit {
     let keys = Object.keys(this.localTaskList.tasks);
 
     if (keys.length === 0) {
-      this.createTask();
-    } else {
-      keys.forEach(key => {
-        this.prevTaskIndex = this.localTaskList.tasks[key].id;
-        this.createTask();
-      });
+      return this.createTask();
     }
+
+    keys.forEach(key => {
+      this.prevTaskIndex = this.localTaskList.tasks[key].id;
+      this.createTask();
+    });
   }
 
   createTask() {
@@ -87,6 +87,9 @@ export class TaskListComponent implements OnInit {
 
   removeTask(id: number) {
     this.tasks[id].destroy();
+    delete this.localTaskList.tasks[id];
+    localStorage.setItem('taskList', JSON.stringify({tasks: this.localTaskList.tasks}));
+    this.updateLocalTaskList();
   }
 }
 

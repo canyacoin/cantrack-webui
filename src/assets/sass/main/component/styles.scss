@@ -100,6 +100,9 @@
     }
   }
   .form-control {
+    &::placeholder {
+      color: $gray-300;
+    }
     border-radius: 0;
     border: none;
     &:focus,

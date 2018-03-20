@@ -19,11 +19,13 @@ export class TaskListComponent implements OnInit {
 
   localTaskList: any;
 
+  localTaskListName: string = 'taskList'
+
   constructor(private resolver: ComponentFactoryResolver) {
-    this.localTaskList = localStorage.getItem('taskList') ? JSON.parse(localStorage.getItem('taskList')) : null;
+    this.localTaskList = localStorage.getItem(this.localTaskListName) ? JSON.parse(localStorage.getItem(this.localTaskListName)) : null;
 
     if (!this.localTaskList) {
-      localStorage.setItem('taskList', JSON.stringify({tasks: {}}));
+      localStorage.setItem(this.localTaskListName, JSON.stringify({tasks: {}}));
       this.updateLocalTaskList();
     }
   }
@@ -58,6 +60,8 @@ export class TaskListComponent implements OnInit {
 
     this.taskRef.instance.id = this.prevTaskIndex;
 
+    this.taskRef.instance.store();
+
     let textarea = this.taskRef.location.nativeElement.querySelector('textarea');
 
     let maxRowLength = this.taskRef.instance.maxRowLength;
@@ -70,35 +74,16 @@ export class TaskListComponent implements OnInit {
     this.tasks[this.prevTaskIndex] = this.taskRef;
 
     this.prevTaskIndex++;
-
-    this.storeTask();
-  }
-
-  storeTask() {
-    let taskList = JSON.parse(localStorage.getItem('taskList'));
-    let localTask = this.localTaskList.tasks[this.taskRef.instance.id];
-
-    taskList.tasks[this.taskRef.instance.id] = {
-      id: this.taskRef.instance.id,
-      description: localTask ? localTask.description : '',
-      subTasks: {},
-      time: localTask ? localTask.time : 0,
-      ranges: localTask ? localTask.ranges : [],
-    }
-
-    localStorage.setItem('taskList', JSON.stringify({tasks: taskList.tasks}));
-
-    this.updateLocalTaskList();
   }
 
   updateLocalTaskList() {
-    this.localTaskList = JSON.parse(localStorage.getItem('taskList'));
+    this.localTaskList = JSON.parse(localStorage.getItem(this.localTaskListName));
   }
 
   removeTask(id: number) {
     this.tasks[id].destroy();
     delete this.localTaskList.tasks[id];
-    localStorage.setItem('taskList', JSON.stringify({tasks: this.localTaskList.tasks}));
+    localStorage.setItem(this.localTaskListName, JSON.stringify({tasks: this.localTaskList.tasks}));
     this.updateLocalTaskList();
   }
 }

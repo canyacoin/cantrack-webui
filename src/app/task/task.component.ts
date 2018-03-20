@@ -44,8 +44,9 @@ export class TaskComponent implements OnInit {
   }
 
   setCurrentTime() {
-    let tasks = JSON.parse(localStorage.getItem('taskList')).tasks;
+    let tasks = JSON.parse(localStorage.getItem(this.taskList.localTaskListName)).tasks;
     this.localTimer.counter.prev = tasks[this.id].time;
+    this.localTimer.counter.ranges = tasks[this.id].ranges;
     this.localTimer.setTime();
   }
 
@@ -77,8 +78,21 @@ export class TaskComponent implements OnInit {
     this.subTasks[id].destroy();
   }
 
+  store() {
+    let tasks = JSON.parse(localStorage.getItem(this.taskList.localTaskListName)).tasks;
+
+    tasks[this.id] = {
+      id: this.id,
+      description: tasks[this.id] ? tasks[this.id].description : this.description,
+      time: tasks[this.id] ? tasks[this.id].time : this.time,
+      ranges: tasks[this.id] ? tasks[this.id].ranges : this.localTimer.counter.ranges,
+    };
+
+    localStorage.setItem(this.taskList.localTaskListName, JSON.stringify({tasks: tasks}));
+  }
+
   updateLocalTime(time) {
-    let tasks = JSON.parse(localStorage.getItem('taskList')).tasks;
+    let tasks = JSON.parse(localStorage.getItem(this.taskList.localTaskListName)).tasks;
 
     let task = tasks[this.id];
 
@@ -86,27 +100,27 @@ export class TaskComponent implements OnInit {
 
     this.time = time;
 
-    localStorage.setItem('taskList', JSON.stringify({tasks: tasks}));
+    localStorage.setItem(this.taskList.localTaskListName, JSON.stringify({tasks: tasks}));
   }
 
   updateLocalRanges() {
-    let tasks = JSON.parse(localStorage.getItem('taskList')).tasks;
+    let tasks = JSON.parse(localStorage.getItem(this.taskList.localTaskListName)).tasks;
 
     let task = tasks[this.id];
 
     task.ranges = this.localTimer.counter.ranges;
 
-    localStorage.setItem('taskList', JSON.stringify({tasks: tasks}));
+    localStorage.setItem(this.taskList.localTaskListName, JSON.stringify({tasks: tasks}));
   }
 
   onKeyUp(e) {
-    let tasks = JSON.parse(localStorage.getItem('taskList')).tasks;
+    let tasks = JSON.parse(localStorage.getItem(this.taskList.localTaskListName)).tasks;
 
     let task = tasks[this.id];
 
     task.description = this.description;
 
-    localStorage.setItem('taskList', JSON.stringify({tasks: tasks}));
+    localStorage.setItem(this.taskList.localTaskListName, JSON.stringify({tasks: tasks}));
 
     let el = e.target;
 

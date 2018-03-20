@@ -29,16 +29,24 @@
     @include flex-row-space-between;
     @include list-unstyled;
     li {
-      border-right: 1px solid $gray-100;
-      background-color: $yellow;
+      border-right: 1px solid white;
+      background-color: $gray-100;
       position: relative;
       flex-grow: 1;
       height: 56px;
-      span {
+      > span {
         font-size: $font-size-sm - 0.2;
         position: absolute;
         top: -21px;
         left: 0;
+      }
+      .ranges {
+        @include flex-row;
+        height: 100%;
+      }
+      .range {
+        background-color: $yellow;
+        height: 100%;
       }
     }
   }

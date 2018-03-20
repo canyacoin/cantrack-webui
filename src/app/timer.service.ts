@@ -47,7 +47,9 @@ export class TimerService {
       let hour = moment().startOf('day').add(i, 'hour').format('ha');
       this.today.push({
         hour: hour,
-        width: `${100 / hours}%`;
+        display: (i == 0 || i == hours) ? true : false,
+        width: `${100 / hours}%`,
+        ranges: [],
       })
     }
     console.log(this.today);
@@ -100,9 +102,12 @@ export class TimerService {
   }
 
   closeRange() {
-    this.counter.ranges[this.counter.ranges.length-1].to = moment().format();
+    let now = moment().format();
+
+    this.counter.ranges[this.counter.ranges.length-1].to = now;
 
     this.task.updateLocalRanges();
+    this.task.updateGlobalRanges();
   }
 
   stopLocalTimers() {

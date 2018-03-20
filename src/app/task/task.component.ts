@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChild, ComponentFactory, ComponentRef, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { TimerService } from '../timer.service';
 import { SubTaskComponent } from '../sub-task/sub-task.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-task',
@@ -30,6 +31,10 @@ export class TaskComponent implements OnInit {
 
   maxRowLength: number = 17
 
+  taskColors = ['#33CCFF', '#6610f2', '#6f42c1', '#F9A4D8', '#FF6666', '#fd7e14', '#FFC600', '#00ACA0', '#20c997', '#17a2b8']
+
+  taskColor: string
+
   constructor(
     public globalTimer: TimerService,
     private resolver: ComponentFactoryResolver) {
@@ -37,6 +42,7 @@ export class TaskComponent implements OnInit {
     this.localTimer.counter.isLocalTimer = true;
     this.localTimer.task = this;
     this.globalTimer.addLocalTimer(this.localTimer);
+    this.taskColor = this.taskColors[Math.floor(Math.random() * this.taskColors.length-1) + 1];
   }
 
   ngOnInit() {
@@ -85,6 +91,7 @@ export class TaskComponent implements OnInit {
       id: this.id,
       description: tasks[this.id] ? tasks[this.id].description : this.description,
       time: tasks[this.id] ? tasks[this.id].time : this.time,
+      color: tasks[this.id] ? tasks[this.id].color : this.taskColor,
       ranges: tasks[this.id] ? tasks[this.id].ranges : this.localTimer.counter.ranges,
     };
 
@@ -111,6 +118,31 @@ export class TaskComponent implements OnInit {
     task.ranges = this.localTimer.counter.ranges;
 
     localStorage.setItem(this.taskList.localTaskListName, JSON.stringify({tasks: tasks}));
+  }
+
+  updateGlobalRanges() {
+    let tasks = JSON.parse(localStorage.getItem(this.taskList.localTaskListName)).tasks;
+
+    let task = tasks[this.id];
+
+    let ranges = task.ranges;
+
+    let lastRange = ranges[ranges.length-1];
+
+    let secondsInHour = 60 * 60;
+
+    let from = moment(lastRange.from);
+    let to = moment(lastRange.to);
+    let diff = to.unix() - from.unix();
+    let width = (secondsInHour/diff) / 100;
+    let hour = this.globalTimer.today[from.format('H')];
+
+    hour.ranges.push({
+      width: `${width}%`,
+      color: task.color,
+    });
+
+    hour.display = true;
   }
 
   onKeyUp(e) {

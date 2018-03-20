@@ -7,7 +7,13 @@
   <div class="timeline-wrapper">
     <ul class="timeline">
       <li *ngFor="let h of globalTimer.today; let $i = index" [attr.width]="h.width">
-        <span>{{ h.hour }}</span>
+        <span *ngIf="h.display">{{ h.hour }}</span>
+        <div class="ranges">
+          <span *ngFor="let range of h.ranges"
+            [style.width]="range.width"
+            [style.backgroundColor]="range.color"
+            class="range"></span>
+        </div>
       </li>
     </ul>
   </div>

@@ -1,7 +1,46 @@
 @import "./src/assets/sass/canya-time-tracker";
 
 .task {
-
+  position: relative;
+  .card-body {
+    padding: 0;
+  }
+  .description {}
+  .time {}
+  .timer-trigger-wrapper {
+    text-align: center;
+    .play {}
+    .stop {}
+  }
+  .form-control {
+    &::placeholder {
+      color: $gray-300;
+    }
+    font-size: $h5-font-size;
+    font-weight: 600;
+    border-radius: 0;
+    border: none;
+    &:focus {
+      box-shadow: inherit;
+      border: none;
+    }
+  }
+  .remove-task {
+    position: absolute;
+    text-align: right;
+    font-size: 18px;
+    display: none;
+    width: 100%;
+    color: $red;
+    right: -9px;
+    top: -16px;
+  }
+  &:hover {
+    .remove-task {
+      cursor: pointer;
+      display: block;
+    }
+  }
 }
 
 .task-row {

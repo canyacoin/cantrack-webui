@@ -7,6 +7,7 @@
 @import "./node_modules/bootstrap/scss/forms";
 @import "./node_modules/bootstrap/scss/bootstrap-grid";
 @import "./node_modules/bootstrap/scss/utilities";
+@import "./node_modules/bootstrap/scss/card";
 
 @import "./src/assets/sass/fontawesome/fontawesome";
 @import "./src/assets/sass/fontawesome/fa-brands";
@@ -108,6 +109,26 @@
     &:focus,
     &:blur {
       border: none;
+    }
+  }
+}
+
+.task {
+  .timer-trigger-wrapper {
+    text-align: center;
+    .timer-trigger {
+      font-size: $h1-font-size;
+    }
+    .play {}
+    .stop {}
+  }
+}
+
+[id*="task-"] {
+  &.on-focus {
+    .task,
+    .form-control {
+      background-color: $gray-100;
     }
   }
 }

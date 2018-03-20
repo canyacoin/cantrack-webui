@@ -97,6 +97,14 @@ export class TaskComponent implements OnInit {
     localStorage.setItem('taskList', JSON.stringify({tasks: tasks}));
   }
 
+  onFocus(e) {
+    document.querySelector(`#task-${this.id}`).classList.add('on-focus');
+  }
+
+  onBlur(e) {
+    document.querySelector(`#task-${this.id}`).classList.remove('on-focus');
+  }
+
   onEnter(e) {
     e.preventDefault();
     this.taskList.createTask();
@@ -104,7 +112,8 @@ export class TaskComponent implements OnInit {
 
   onTab(e) {
     e.preventDefault();
-    this.createSubTask();
+    this.taskList.createTask();
+    // this.createSubTask();
   }
 
 }

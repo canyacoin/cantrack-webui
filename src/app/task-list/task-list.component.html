@@ -1,5 +1,16 @@
 <div class="task-list-wrapper">
   <div class="task-list">
-    <template #taskList></template>
+    <div class="row">
+      <template #taskList></template>
+
+      <div class="col-3">
+        <article class="card border-primary new-task mb-3" (click)="createTask()">
+          <div class="card-body">
+            <span class="add-card-icon text-primary"><i class="fa fa-plus-circle"></i></span>
+            <span class="add-card-text text-primary">Add task</span>
+          </div>
+        </article>
+      </div>
+    </div>
   </div>
 </div>

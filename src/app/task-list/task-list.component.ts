@@ -50,6 +50,10 @@ export class TaskListComponent implements OnInit {
 
     this.taskRef = this.container.createComponent(factory);
 
+    this.taskRef.location.nativeElement.classList.add('col-3');
+
+    this.taskRef.location.nativeElement.id = `task-${this.prevTaskIndex}`;
+
     this.taskRef.instance.taskList = this;
 
     this.taskRef.instance.id = this.prevTaskIndex;

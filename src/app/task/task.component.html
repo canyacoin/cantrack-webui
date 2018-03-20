@@ -1,28 +1,23 @@
-<article class="task">
-  <div class="task-row">
-    <div class="actions">
-      <app-timer-trigger size="small" *ngIf="localTimer" [timer]="localTimer"></app-timer-trigger>
-    </div>
-    <div class="time">
-      <span>{{ localTimer.counter.days }}:{{ localTimer.counter.hours }}:{{ localTimer.counter.minutes }}:{{ localTimer.counter.seconds }}</span>
-    </div>
+<article class="card border-primary task mb-3">
+  <span class="remove-task" (click)="remove()"><i class="fa fa-minus-circle"></i></span>
+  <div class="card-body">
     <div class="description">
       <textarea
-        (keyup.enter)="onEnter($event)"
-        (keydown.tab)="onTab($event)"
+        (focus)="onFocus($event)"
+        (blur)="onBlur($event)"
         (keyup)="onKeyUp($event)"
         [(ngModel)]="description"
-        rows="1"
+        rows="3"
         class="form-control"
         placeholder="Type a task. Press tab to add a sub-task or enter to add a new task."></textarea>
     </div>
-    <div class="add-remove">
-      <div>
-        <span class="add" (click)="add()"><i class="fa fa-plus-circle"></i></span>
-        <span class="remove" *ngIf="id != 0" (click)="remove()"><i class="fa fa-minus-circle"></i></span>
-      </div>
+    <div class="timer-trigger-wrapper">
+      <app-timer-trigger *ngIf="localTimer" [timer]="localTimer"></app-timer-trigger>
     </div>
   </div>
-
-  <template #subTask></template>
+  <div class="card-footer text-muted time text-center">
+    <span>{{ localTimer.counter.days }}:{{ localTimer.counter.hours }}:{{ localTimer.counter.minutes }}:{{ localTimer.counter.seconds }}</span>
+  </div>
 </article>
+
+

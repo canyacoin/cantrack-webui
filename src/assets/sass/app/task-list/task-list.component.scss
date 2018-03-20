@@ -10,6 +10,26 @@
   border: 1px solid $gray-100;
 }
 
+.new-task {
+  &:hover {
+    @include box-shadow-default;
+    cursor: pointer;
+  }
+  .card-body {
+    @include flex-column-center;
+    text-align: center;
+    min-height: 233px;
+  }
+  .add-card-icon,
+  .add-card-text {
+    display: block;
+  }
+  .add-card-icon {
+    font-size: $h1-font-size;
+  }
+  .add-card-text {}
+}
+
 
 
 

@@ -1,25 +1,14 @@
 <header class="global-time">
-  <nav class="d-print-none">
-    <button class="btn btn-sm btn-outline btn-primary timer-publish">Publish to ethereum</button>
-    <button class="btn btn-sm btn-outline btn-danger timer-reset">Reset global timer</button>
-  </nav>
-  <div class="row">
-    <div class="col-6">
-      <div class="counter">
-        <div class="countdown countdown-sm" data-countdown="2018/08/19">
-          <div class="row">
-            <div class="col"><h5>{{ globalTimer.counter.days }}</h5><small>Days</small></div>
-            <div class="col"><h5>{{ globalTimer.counter.hours }}</h5><small>Hours</small></div>
-            <div class="col"><h5>{{ globalTimer.counter.minutes }}</h5><small>Minutes</small></div>
-            <div class="col"><h5>{{ globalTimer.counter.seconds }}</h5><small>Seconds</small></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="actions">
-        <app-timer-trigger *ngIf="globalTimer" [timer]="globalTimer"></app-timer-trigger>
-      </div>
-    </div>
+  <div class="date-wrapper">
+    <span class="prev"><i class="fa fa-chevron-left"></i></span>
+    <span class="date">Today</span>
+    <span class="next"><i class="fa fa-chevron-right"></i></span>
+  </div>
+  <div class="timeline-wrapper">
+    <ul class="timeline">
+      <li *ngFor="let h of globalTimer.today; let $i = index" [attr.width]="h.width">
+        <span>{{ h.hour }}</span>
+      </li>
+    </ul>
   </div>
 </header>

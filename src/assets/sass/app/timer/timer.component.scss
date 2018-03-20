@@ -1,6 +1,8 @@
 @import "./src/assets/sass/canya-time-tracker";
 
 .global-time {
+  @include flex-column-center;
+  @include make-container;
   > nav {
     @include make-container;
     padding-top: get-spacer(2);
@@ -16,5 +18,43 @@
   }
   .actions {
 
+  }
+
+  .timeline-wrapper {
+    @include flex-column-center;
+    min-height: 210px;
+  }
+
+  .timeline {
+    @include flex-row-space-between;
+    @include list-unstyled;
+    li {
+      border-right: 1px solid $gray-100;
+      background-color: $yellow;
+      position: relative;
+      flex-grow: 1;
+      height: 56px;
+      span {
+        font-size: $font-size-sm - 0.2;
+        position: absolute;
+        top: -21px;
+        left: 0;
+      }
+    }
+  }
+
+  .date-wrapper {
+    padding: get-spacer(4);
+    padding-bottom: 0;
+    text-align: center;
+    .date {
+      font-size: $h2-font-size;
+    }
+    .prev,
+    .next {
+      font-size: $h3-font-size;
+      color: $gray-400;
+      padding: 0 get-spacer(2);
+    }
   }
 }

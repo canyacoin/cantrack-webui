@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TimerService } from '../timer.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-timer-trigger',
@@ -23,6 +24,8 @@ export class TimerTriggerComponent implements OnInit {
       this.globalTimer
         .onTimerStop()
         .onTimerStart();
+
+      timer.addRange();
     }
 
     timer.onTimerStart();
@@ -33,6 +36,8 @@ export class TimerTriggerComponent implements OnInit {
 
     if (timer.counter.isLocalTimer) {
       this.globalTimer.onTimerStop();
+
+      timer.closeRange();
     }
 
     timer.onTimerStop();

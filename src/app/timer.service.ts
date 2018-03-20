@@ -1,4 +1,5 @@
 import { Injectable, Optional } from '@angular/core';
+import * as moment from 'moment';
 
 const second = 1000,
       minute = second * 60,
@@ -7,6 +8,8 @@ const second = 1000,
 
 @Injectable()
 export class TimerService {
+
+  today = []
 
   localTimers = [];
 
@@ -20,6 +23,7 @@ export class TimerService {
     hours: 0,
     minutes: 0,
     seconds: 0,
+    ranges: []
   }
 
   task: any
@@ -30,16 +34,35 @@ export class TimerService {
 
   constructor(@Optional() isLocalTimer: boolean = false) {
     if (!isLocalTimer) {
-      this.globalTimer = localStorage.getItem(this.localStorageName) ?
-                        JSON.parse(localStorage.getItem(this.localStorageName)) :
-                        null;
+      this.setLocalGlobalTimer();
 
-      if (!this.globalTimer) {
-        this.updateGlobalTimer({counter: this.counter});
-      } else {
-        this.globalTimer.counter.isOn = false;
-        this.counter = this.globalTimer.counter;
-      }
+      this.initTimeline();
+    }
+  }
+
+  initTimeline() {
+    const hours = 24;
+
+    for (let i = 0; i <= hours; i++) {
+      let hour = moment().startOf('day').add(i, 'hour').format('ha');
+      this.today.push({
+        hour: hour,
+        width: `${100 / hours}%`;
+      })
+    }
+    console.log(this.today);
+  }
+
+  setLocalGlobalTimer(isLocalTimer) {
+    this.globalTimer = localStorage.getItem(this.localStorageName) ?
+                      JSON.parse(localStorage.getItem(this.localStorageName)) :
+                      null;
+
+    if (!this.globalTimer) {
+      this.updateGlobalTimer({counter: this.counter});
+    } else {
+      this.globalTimer.counter.isOn = false;
+      this.counter = this.globalTimer.counter;
     }
   }
 
@@ -66,6 +89,20 @@ export class TimerService {
     }
 
     return this;
+  }
+
+  addRange() {
+    this.counter.ranges.push({
+      from: moment().format(),
+    });
+
+    this.task.updateLocalRanges();
+  }
+
+  closeRange() {
+    this.counter.ranges[this.counter.ranges.length-1].to = moment().format();
+
+    this.task.updateLocalRanges();
   }
 
   stopLocalTimers() {

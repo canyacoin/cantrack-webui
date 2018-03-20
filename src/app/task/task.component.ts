@@ -89,6 +89,16 @@ export class TaskComponent implements OnInit {
     localStorage.setItem('taskList', JSON.stringify({tasks: tasks}));
   }
 
+  updateLocalRanges() {
+    let tasks = JSON.parse(localStorage.getItem('taskList')).tasks;
+
+    let task = tasks[this.id];
+
+    task.ranges = this.localTimer.counter.ranges;
+
+    localStorage.setItem('taskList', JSON.stringify({tasks: tasks}));
+  }
+
   onKeyUp(e) {
     let tasks = JSON.parse(localStorage.getItem('taskList')).tasks;
 

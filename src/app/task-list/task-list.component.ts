@@ -58,14 +58,6 @@ export class TaskListComponent implements OnInit {
 
     this.taskRef.instance.id = this.prevTaskIndex;
 
-    this.taskRef.instance.description = this.localTaskList.tasks[this.prevTaskIndex] ?
-                                        this.localTaskList.tasks[this.prevTaskIndex].description :
-                                        '';
-
-    this.taskRef.instance.time = this.localTaskList.tasks[this.prevTaskIndex] ?
-                                this.localTaskList.tasks[this.prevTaskIndex].time :
-                                0;
-
     let textarea = this.taskRef.location.nativeElement.querySelector('textarea');
 
     let maxRowLength = this.taskRef.instance.maxRowLength;
@@ -84,12 +76,14 @@ export class TaskListComponent implements OnInit {
 
   storeTask() {
     let taskList = JSON.parse(localStorage.getItem('taskList'));
+    let localTask = this.localTaskList.tasks[this.taskRef.instance.id];
 
     taskList.tasks[this.taskRef.instance.id] = {
       id: this.taskRef.instance.id,
-      description: this.taskRef.instance.description,
+      description: localTask ? localTask.description : '',
       subTasks: {},
-      time: this.taskRef.instance.time,
+      time: localTask ? localTask.time : 0,
+      ranges: localTask ? localTask.ranges : [],
     }
 
     localStorage.setItem('taskList', JSON.stringify({tasks: taskList.tasks}));

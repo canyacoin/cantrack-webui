@@ -34,6 +34,10 @@
       position: relative;
       flex-grow: 1;
       height: 56px;
+      &:hover {
+        @include box-shadow-default;
+        flex-grow: 11;
+      }
       > span {
         font-size: $font-size-sm - 0.2;
         position: absolute;
@@ -45,8 +49,13 @@
         height: 100%;
       }
       .range {
+        transition: all 0.2s ease-in-out;
         background-color: $yellow;
         height: 100%;
+        &:hover {
+          transform: translateY(-7px);
+          cursor: pointer;
+        }
       }
     }
   }

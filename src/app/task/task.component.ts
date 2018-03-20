@@ -127,6 +127,8 @@ export class TaskComponent implements OnInit {
 
     let ranges = task.ranges;
 
+    if (ranges.length === 0) return;
+
     let lastRange = ranges[ranges.length-1];
 
     let secondsInHour = 60 * 60;

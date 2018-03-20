@@ -35,24 +35,7 @@ export class TimerService {
   constructor(@Optional() isLocalTimer: boolean = false) {
     if (!isLocalTimer) {
       this.setLocalGlobalTimer();
-
-      this.initTimeline();
     }
-  }
-
-  initTimeline() {
-    const hours = 24;
-
-    for (let i = 0; i <= hours; i++) {
-      let hour = moment().startOf('day').add(i, 'hour').format('ha');
-      this.today.push({
-        hour: hour,
-        display: (i == 0 || i == hours) ? true : false,
-        width: `${100 / hours}%`,
-        ranges: [],
-      })
-    }
-    console.log(this.today);
   }
 
   setLocalGlobalTimer(isLocalTimer) {

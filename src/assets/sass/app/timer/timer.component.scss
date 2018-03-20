@@ -22,7 +22,8 @@
 
   .timeline-wrapper {
     @include flex-column-center;
-    min-height: 210px;
+    margin-bottom: get-spacer(3);
+    min-height: 180px;
   }
 
   .timeline {

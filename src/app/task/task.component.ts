@@ -151,12 +151,15 @@ export class TaskComponent implements OnInit {
     let from = moment(lastRange.from);
     let to = moment(lastRange.to);
     let diff = to.unix() - from.unix();
-    let width = (diff/secondsInHour) * 100;
+    let div = (diff/secondsInHour);
+    let width = div > 1 ? 100 : div * 100;
     let hour = this.globalTimer.today[from.format('H')];
 
     hour.ranges.push({
       width: `${width}%`,
       color: task.color,
+      taskId: this.id,
+      diff: diff,
     });
 
     hour.display = true;

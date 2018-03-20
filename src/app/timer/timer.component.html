@@ -12,6 +12,8 @@
           <span *ngFor="let range of h.ranges"
             [style.width]="range.width"
             [style.backgroundColor]="range.color"
+            [attr.data-task-id]="range.taskId"
+            [attr.data-diff]="range.diff"
             class="range"></span>
         </div>
       </li>

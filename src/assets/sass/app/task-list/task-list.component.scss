@@ -5,10 +5,7 @@
   padding-bottom: get-spacer(3);
 }
 
-.task-list {
-  border-radius: $border-radius;
-  border: 1px solid $gray-100;
-}
+.task-list {}
 
 .new-task {
   &:hover {
@@ -18,7 +15,7 @@
   .card-body {
     @include flex-column-center;
     text-align: center;
-    min-height: 233px;
+    min-height: 173px;
   }
   .add-card-icon,
   .add-card-text {

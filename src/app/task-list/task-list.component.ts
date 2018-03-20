@@ -66,7 +66,14 @@ export class TaskListComponent implements OnInit {
                                 this.localTaskList.tasks[this.prevTaskIndex].time :
                                 0;
 
-    this.taskRef.location.nativeElement.querySelector('textarea').focus();
+    let textarea = this.taskRef.location.nativeElement.querySelector('textarea');
+
+    let maxRowLength = this.taskRef.instance.maxRowLength;
+
+    let textLength = this.taskRef.instance.description.length;
+
+    textarea.rows = Math.floor((textLength/maxRowLength) % maxRowLength) + 1;
+    textarea.focus();
 
     this.tasks[this.prevTaskIndex] = this.taskRef;
 

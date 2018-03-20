@@ -6,10 +6,10 @@
     cursor: pointer;
   }
   &.play {
-    color: $green;
+    color: $blue;
     &:hover,
     &.active {
-      color: darken($green, 7%);
+      color: darken($blue, 7%);
     }
   }
   &.stop {

@@ -28,6 +28,8 @@ export class TaskComponent implements OnInit {
 
   prevSubTaskIndex = 0
 
+  maxRowLength: number = 17
+
   constructor(
     public globalTimer: TimerService,
     private resolver: ComponentFactoryResolver) {
@@ -95,6 +97,10 @@ export class TaskComponent implements OnInit {
     task.description = this.description;
 
     localStorage.setItem('taskList', JSON.stringify({tasks: tasks}));
+
+    let el = e.target;
+
+    el.rows = Math.floor((el.textLength/this.maxRowLength) % this.maxRowLength) + 1;
   }
 
   onFocus(e) {

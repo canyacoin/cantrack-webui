@@ -1,4 +1,4 @@
-<article class="card border-primary task mb-3">
+<article class="card task mb-3">
   <span class="remove-task" (click)="remove()"><i class="fa fa-minus-circle"></i></span>
   <div class="card-body">
     <div class="description">
@@ -7,9 +7,9 @@
         (blur)="onBlur($event)"
         (keyup)="onKeyUp($event)"
         [(ngModel)]="description"
-        rows="3"
+        rows="1"
         class="form-control"
-        placeholder="Type a task. Press tab to add a sub-task or enter to add a new task."></textarea>
+        placeholder="My task..."></textarea>
     </div>
     <div class="timer-trigger-wrapper">
       <app-timer-trigger *ngIf="localTimer" [timer]="localTimer"></app-timer-trigger>

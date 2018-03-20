@@ -38,7 +38,7 @@ export class TimerService {
     }
   }
 
-  setLocalGlobalTimer(isLocalTimer) {
+  setLocalGlobalTimer() {
     this.globalTimer = localStorage.getItem(this.localStorageName) ?
                       JSON.parse(localStorage.getItem(this.localStorageName)) :
                       null;

@@ -60,10 +60,6 @@ export class TaskListComponent implements OnInit {
 
     this.taskRef.instance.id = this.prevTaskIndex;
 
-    this.taskRef.instance.store();
-
-    this.taskRef.instance.updateGlobalRanges();
-
     let textarea = this.taskRef.location.nativeElement.querySelector('textarea');
 
     let maxRowLength = this.taskRef.instance.maxRowLength;

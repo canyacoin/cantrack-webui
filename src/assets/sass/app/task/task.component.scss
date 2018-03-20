@@ -1,6 +1,7 @@
 @import "./src/assets/sass/canya-time-tracker";
 
 .task {
+  border-top: 7px solid;
   position: relative;
   .card-body {
     padding: 0;
@@ -33,7 +34,7 @@
     width: 100%;
     color: $red;
     right: -9px;
-    top: -16px;
+    top: -21px;
   }
   &:hover {
     .remove-task {

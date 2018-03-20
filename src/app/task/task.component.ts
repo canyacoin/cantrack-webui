@@ -42,11 +42,26 @@ export class TaskComponent implements OnInit {
     this.localTimer.counter.isLocalTimer = true;
     this.localTimer.task = this;
     this.globalTimer.addLocalTimer(this.localTimer);
-    this.taskColor = this.taskColors[Math.floor(Math.random() * this.taskColors.length-1) + 1];
   }
 
   ngOnInit() {
+    this.setTaskColor();
+
+    this.store();
+
     this.setCurrentTime();
+
+    setTimeout(() => {
+      this.updateGlobalRanges();
+    }, 1000);
+
+  }
+
+  setTaskColor() {
+    let tasks = JSON.parse(localStorage.getItem(this.taskList.localTaskListName)).tasks;
+    this.taskColor = tasks[this.id] && tasks[this.id].color ?
+                    tasks[this.id].color :
+                    this.taskColors[Math.floor(Math.random() * this.taskColors.length-1) + 1];
   }
 
   setCurrentTime() {
@@ -91,7 +106,7 @@ export class TaskComponent implements OnInit {
       id: this.id,
       description: tasks[this.id] ? tasks[this.id].description : this.description,
       time: tasks[this.id] ? tasks[this.id].time : this.time,
-      color: tasks[this.id] ? tasks[this.id].color : this.taskColor,
+      color: tasks[this.id] && tasks[this.id].color ? tasks[this.id].color : this.taskColor,
       ranges: tasks[this.id] ? tasks[this.id].ranges : this.localTimer.counter.ranges,
     };
 
@@ -136,7 +151,7 @@ export class TaskComponent implements OnInit {
     let from = moment(lastRange.from);
     let to = moment(lastRange.to);
     let diff = to.unix() - from.unix();
-    let width = (secondsInHour/diff) / 100;
+    let width = (diff/secondsInHour) * 100;
     let hour = this.globalTimer.today[from.format('H')];
 
     hour.ranges.push({

@@ -11,7 +11,7 @@ export class TimerService {
 
   today = []
 
-  dates = []
+  dates = {}
 
   createdAt: string
 
@@ -48,19 +48,27 @@ export class TimerService {
                       null;
 
     if (!this.globalTimer) {
-      this.updateGlobalTimer({
-        counter: this.counter,
-        createdAt: moment().format()
-      });
+      this.createdAt = moment().format('Y-M-D');
+      this.updateGlobalTimer();
     } else {
       this.globalTimer.counter.isOn = false;
       this.counter = this.globalTimer.counter;
       this.createdAt = this.globalTimer.createdAt;
+      this.dates = this.globalTimer.dates;
     }
   }
 
-  updateGlobalTimer(data) {
-    localStorage.setItem(this.localStorageName, JSON.stringify(data));
+  updateGlobalTimer(data?: any) {
+    let _default = {
+      counter: this.counter,
+      createdAt: this.createdAt,
+      dates: this.dates,
+    };
+
+    let _data = Object.assign(data || {}, _default);
+
+    localStorage.setItem(this.localStorageName, JSON.stringify(_data));
+
     this.globalTimer = JSON.parse(localStorage.getItem(this.localStorageName));
   }
 

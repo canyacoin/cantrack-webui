@@ -164,6 +164,13 @@ export class TaskComponent implements OnInit {
     });
 
     hour.display = true;
+
+    let today = moment().format('Y-M-D');
+
+    if (today === from.format('Y-M-D')) {
+      this.globalTimer.dates[moment().format('Y-M-D')] = this.globalTimer.today;
+      this.globalTimer.updateGlobalTimer({dates: this.globalTimer.dates});
+    }
   }
 
   onKeyUp(e) {

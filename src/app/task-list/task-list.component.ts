@@ -21,6 +21,14 @@ export class TaskListComponent implements OnInit {
 
   localTaskListName: string = 'taskList'
 
+  defaultTasks: Array<string> = [
+    'Send contract to the client',
+    'Ask for company assets',
+    'Setup a tribe for the project',
+    'Set project milestones',
+    'Create GIT repo',
+  ];
+
   constructor(private resolver: ComponentFactoryResolver) {
     this.localTaskList = localStorage.getItem(this.localTaskListName) ? JSON.parse(localStorage.getItem(this.localTaskListName)) : null;
 
@@ -38,7 +46,9 @@ export class TaskListComponent implements OnInit {
     let keys = Object.keys(this.localTaskList.tasks);
 
     if (keys.length === 0) {
-      return this.createTask();
+      for (let i = 0; i < this.defaultTasks.length; i++) {
+        this.createTask(this.defaultTasks[i]);
+      }
     }
 
     keys.forEach(key => {
@@ -47,7 +57,7 @@ export class TaskListComponent implements OnInit {
     });
   }
 
-  createTask() {
+  createTask(description?: string = '') {
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(TaskComponent);
 
     this.taskRef = this.container.createComponent(factory);
@@ -60,14 +70,7 @@ export class TaskListComponent implements OnInit {
 
     this.taskRef.instance.id = this.prevTaskIndex;
 
-    let textarea = this.taskRef.location.nativeElement.querySelector('textarea');
-
-    let maxRowLength = this.taskRef.instance.maxRowLength;
-
-    let textLength = this.taskRef.instance.description.length;
-
-    textarea.rows = Math.floor((textLength/maxRowLength) % maxRowLength) + 1;
-    textarea.focus();
+    this.taskRef.instance.description = description;
 
     this.tasks[this.prevTaskIndex] = this.taskRef;
 

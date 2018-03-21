@@ -13,6 +13,8 @@ export class TaskComponent implements OnInit {
 
   @ViewChild("subTask", { read: ViewContainerRef }) container
 
+  @ViewChild("taskDescription", { read: ViewContainerRef }) textarea
+
   @Input() localTimer: TimerService
 
   subTaskRef: ComponentRef<any>
@@ -76,7 +78,19 @@ export class TaskComponent implements OnInit {
   setDescription() {
     let tasks = JSON.parse(localStorage.getItem(this.taskList.localTaskListName)).tasks;
 
-    this.description = tasks[this.id].description;
+    this.description = tasks[this.id].description || this.description;
+
+    let textarea = this.textarea.element.nativeElement;
+
+    let maxRowLength = this.maxRowLength;
+
+    let textLength = this.description.length;
+
+    textarea.rows = Math.floor((textLength/maxRowLength) % maxRowLength) + 1;
+
+    setTimeout(() => {
+      textarea.focus();
+    }, 500);
   }
 
   createSubTask() {

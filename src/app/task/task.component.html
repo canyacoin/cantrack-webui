@@ -13,7 +13,7 @@
         placeholder="My task..."></textarea>
     </div>
     <div class="timer-trigger-wrapper">
-      <app-timer-trigger *ngIf="localTimer" [timer]="localTimer"></app-timer-trigger>
+      <app-timer-trigger *ngIf="localTimer" [timer]="localTimer" [color]="taskColor"></app-timer-trigger>
     </div>
   </div>
   <div class="card-footer text-muted time text-center">

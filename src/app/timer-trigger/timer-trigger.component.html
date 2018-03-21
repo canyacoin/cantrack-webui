@@ -1,4 +1,5 @@
 <span
+  [style.color]="color"
   class="timer-trigger play {{ size }}"
   (click)="play(timer)"
   *ngIf="!timer.counter.isOn"><i class="fa fa-play-circle"></i></span>

@@ -11,6 +11,7 @@ export class TimerTriggerComponent implements OnInit {
 
   @Input() size: string;
   @Input() timer: any;
+  @Input() color: string;
 
   constructor(public globalTimer: TimerService) { }
 

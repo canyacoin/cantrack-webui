@@ -11,10 +11,12 @@
 
   .counter, .actions {
     @include flex-column-center;
-    min-height: 210px;
+    min-height: 180px;
   }
-  .counter {
-
+  .countdown-sm {
+    h5 {
+      font-size: $h5-font-size;
+    }
   }
   .actions {
 
@@ -62,9 +64,6 @@
   }
 
   .date-wrapper {
-    padding: get-spacer(4);
-    padding-bottom: 0;
-    text-align: center;
     .date {
       font-size: $h2-font-size;
     }

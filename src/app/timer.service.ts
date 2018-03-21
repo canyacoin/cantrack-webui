@@ -121,8 +121,13 @@ export class TimerService {
     counter.minutes = Math.floor((distance % (hour)) / (minute)),
     counter.seconds = Math.floor((distance % (minute)) / second);
 
-    if (!this.counter.isLocalTimer) {
+    if (!counter.isLocalTimer) {
       this.updateGlobalTimer({counter: counter});
+    }
+
+    if (counter.isLocalTimer && counter.minutes >= 59 && counter.seconds >= 59) {
+      this.closeRange();
+      this.addRange();
     }
   }
 

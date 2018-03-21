@@ -24,8 +24,8 @@
 
   .timeline-wrapper {
     @include flex-column-center;
-    margin-bottom: get-spacer(3);
-    min-height: 180px;
+    margin-bottom: get-spacer(5);
+    min-height: 140px;
   }
 
   .timeline {
@@ -54,10 +54,24 @@
       .range {
         transition: all 0.2s ease-in-out;
         background-color: $yellow;
+        position: relative;
         height: 100%;
         &:hover {
           transform: translateY(-7px);
           cursor: pointer;
+          &:before {
+            border-radius: $border-radius-sm;
+            background-color: $black;
+            content: attr(data-diff);
+            position: absolute;
+            text-align: center;
+            min-width: 56px;
+            font-size: 9px;
+            display: block;
+            color: white;
+            top: -14px;
+            left: 0;
+          }
         }
       }
     }

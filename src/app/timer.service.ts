@@ -11,6 +11,10 @@ export class TimerService {
 
   today = []
 
+  dates = []
+
+  createdAt: string
+
   localTimers = [];
 
   intervalFn: any;
@@ -44,10 +48,14 @@ export class TimerService {
                       null;
 
     if (!this.globalTimer) {
-      this.updateGlobalTimer({counter: this.counter});
+      this.updateGlobalTimer({
+        counter: this.counter,
+        createdAt: moment().format()
+      });
     } else {
       this.globalTimer.counter.isOn = false;
       this.counter = this.globalTimer.counter;
+      this.createdAt = this.globalTimer.createdAt;
     }
   }
 

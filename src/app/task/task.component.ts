@@ -31,7 +31,7 @@ export class TaskComponent implements OnInit {
 
   maxRowLength: number = 17
 
-  taskColors = ['#33CCFF', '#6610f2', '#6f42c1', '#F9A4D8', '#FF6666', '#fd7e14', '#FFC600', '#00ACA0', '#20c997', '#17a2b8']
+  taskColors = ['#54C1AB', '#61DDCA', '#A1F6D8', '#F07272', '#F3A2A2', '#FADFE0', '#2779BF', '#93C0E1', '#D4ECF5', '#F9C647', '#FDE258', '#FEEE9F', '#F6C3E5', '#F8D4ED', '#FAE3F3'];
 
   taskColor: string
 
@@ -149,17 +149,18 @@ export class TaskComponent implements OnInit {
     let secondsInHour = 60 * 60;
 
     let from = moment(lastRange.from);
-    let to = moment(lastRange.to);
+    let to = moment(lastRange.to || from.add(1, 'minute'));
     let diff = to.unix() - from.unix();
-    let div = (diff/secondsInHour);
+    let div = diff / secondsInHour;
     let width = div > 1 ? 100 : div * 100;
+
     let hour = this.globalTimer.today[from.format('H')];
 
     hour.ranges.push({
       width: `${width}%`,
       color: task.color,
       taskId: this.id,
-      diff: diff,
+      diff: `${moment.duration(to.diff(from)).asMinutes().toFixed(1)} mins`,
     });
 
     hour.display = true;

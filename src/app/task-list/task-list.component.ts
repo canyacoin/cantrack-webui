@@ -27,6 +27,7 @@ export class TaskListComponent implements OnInit {
     'Setup a tribe for the project',
     'Set project milestones',
     'Create GIT repo',
+    'Another task...',
   ];
 
   constructor(private resolver: ComponentFactoryResolver) {
@@ -57,7 +58,7 @@ export class TaskListComponent implements OnInit {
     });
   }
 
-  createTask(description?: string = '') {
+  createTask(description?: string) {
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(TaskComponent);
 
     this.taskRef = this.container.createComponent(factory);

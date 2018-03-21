@@ -1,0 +1,14 @@
+@import "./src/assets/sass/canya-time-tracker";
+
+.date-wrapper {
+  margin-left: $navbar-padding-x;
+  .date {
+    font-size: $h4-font-size;
+  }
+  .prev,
+  .next {
+    font-size: $h5-font-size;
+    padding: 0 get-spacer(2);
+    color: $gray-400;
+  }
+}

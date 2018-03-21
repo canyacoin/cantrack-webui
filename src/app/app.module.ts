@@ -12,6 +12,7 @@ import { TaskComponent } from './task/task.component';
 import { SubTaskComponent } from './sub-task/sub-task.component';
 import { TimerService } from './timer.service';
 import { TimerTriggerComponent } from './timer-trigger/timer-trigger.component';
+import { TimelineSwitchComponent } from './timeline-switch/timeline-switch.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { TimerTriggerComponent } from './timer-trigger/timer-trigger.component';
     TaskListComponent,
     TaskComponent,
     SubTaskComponent,
-    TimerTriggerComponent
+    TimerTriggerComponent,
+    TimelineSwitchComponent
   ],
   imports: [
     BrowserModule,

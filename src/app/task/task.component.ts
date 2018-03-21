@@ -51,6 +51,8 @@ export class TaskComponent implements OnInit {
 
     this.setCurrentTime();
 
+    this.setDescription();
+
     setTimeout(() => {
       this.updateGlobalRanges();
     }, 1000);
@@ -69,6 +71,12 @@ export class TaskComponent implements OnInit {
     this.localTimer.counter.prev = tasks[this.id].time;
     this.localTimer.counter.ranges = tasks[this.id].ranges;
     this.localTimer.setTime();
+  }
+
+  setDescription() {
+    let tasks = JSON.parse(localStorage.getItem(this.taskList.localTaskListName)).tasks;
+
+    this.description = tasks[this.id].description;
   }
 
   createSubTask() {

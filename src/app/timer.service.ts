@@ -32,6 +32,8 @@ export class TimerService {
 
   task: any
 
+  previousTask: any
+
   globalTimer: any
 
   localStorageName: string = 'globalTimer'

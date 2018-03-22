@@ -54,11 +54,6 @@ export class TaskComponent implements OnInit {
     this.setCurrentTime();
 
     this.setDescription();
-
-    setTimeout(() => {
-      this.updateGlobalRanges();
-    }, 1000);
-
   }
 
   setTaskColor() {
@@ -190,7 +185,7 @@ export class TaskComponent implements OnInit {
     let today = moment().format(this.globalTimer.dateFormat);
 
     if (today === from.format(this.globalTimer.dateFormat)) {
-      this.globalTimer.dates[moment().format(this.globalTimer.dateFormat)] = this.globalTimer.today;
+      this.globalTimer.dates[today] = this.globalTimer.today;
       this.globalTimer.updateGlobalTimer({dates: this.globalTimer.dates});
     }
   }

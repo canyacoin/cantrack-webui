@@ -19,7 +19,13 @@ export class TimerTriggerComponent implements OnInit {
   }
 
   play(timer) {
+    if (this.globalTimer.previousTask && this.globalTimer.previousTask.localTimer.counter.isOn) {
+      this.globalTimer.previousTask.localTimer.closeRange();
+    }
+
     this.globalTimer.stopLocalTimers();
+
+    this.globalTimer.previousTask = timer.task;
 
     if (timer.counter.isLocalTimer) {
       this.globalTimer

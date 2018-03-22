@@ -33,7 +33,7 @@ export class TaskComponent implements OnInit {
 
   maxRowLength: number = 17
 
-  taskColors = ['#54C1AB', '#61DDCA', '#A1F6D8', '#F07272', '#F3A2A2', '#FADFE0', '#2779BF', '#93C0E1', '#D4ECF5', '#F9C647', '#FDE258', '#FEEE9F', '#F6C3E5', '#F8D4ED', '#FAE3F3'];
+  taskColors = ['#00FFCC', '#33ccff', '#15EDD8', '#4EDCCA', '#FF6666', '#0078BF', '#FFC600', '#F9A4D8', '#485F64'];
 
   taskColor: string
 

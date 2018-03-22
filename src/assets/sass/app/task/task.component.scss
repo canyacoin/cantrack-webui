@@ -7,7 +7,9 @@
     padding: 0;
   }
   .description {}
-  .time {}
+  .time {
+    font-weight: 600;
+  }
   .timer-trigger-wrapper {
     text-align: center;
     .play {}

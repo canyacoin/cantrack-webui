@@ -1,1 +1,1 @@
-.date-wrapper{margin-left:1rem}.date-wrapper .date{font-size:1.5rem}.date-wrapper .prev,.date-wrapper .next{font-size:1.25rem;padding:0 .5rem;color:#ced4da}
+.date-wrapper{margin-left:1rem;border-radius:.25rem;background-color:#f8f9fa}.date-wrapper .date{font-size:1.5rem;font-weight:600}.date-wrapper .prev,.date-wrapper .next{font-size:1.25rem;padding:0 .5rem;color:#ced4da}.date-wrapper .prev:hover,.date-wrapper .next:hover{color:#343a40;cursor:pointer}

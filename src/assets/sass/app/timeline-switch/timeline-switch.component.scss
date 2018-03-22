@@ -2,13 +2,20 @@
 
 .date-wrapper {
   margin-left: $navbar-padding-x;
+  border-radius: $border-radius;
+  background-color: $gray-100;
   .date {
     font-size: $h4-font-size;
+    font-weight: 600;
   }
   .prev,
   .next {
     font-size: $h5-font-size;
     padding: 0 get-spacer(2);
     color: $gray-400;
+    &:hover {
+      color: $gray-800;
+      cursor: pointer;
+    }
   }
 }

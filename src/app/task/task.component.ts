@@ -169,7 +169,7 @@ export class TaskComponent implements OnInit {
     let to = moment(lastRange.to || from.add(1, 'minute'));
     let diff = to.unix() - from.unix();
     let div = diff / secondsInHour;
-    let width = div > 1 ? 100 : div * 100;
+    let width = div > 1 ? 100 : (div * 1000);
 
     let hour = this.globalTimer.today[from.format('H')];
 

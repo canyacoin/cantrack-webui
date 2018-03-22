@@ -54,6 +54,7 @@
         transition: all 0.2s ease-in-out;
         background-color: $yellow;
         position: relative;
+        // flex-basis: 100%;
         height: 100%;
         &:hover {
           transform: translateY(-7px);

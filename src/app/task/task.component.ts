@@ -187,10 +187,10 @@ export class TaskComponent implements OnInit {
 
     hour.display = true;
 
-    let today = moment().format('Y-M-D');
+    let today = moment().format(this.globalTimer.dateFormat);
 
-    if (today === from.format('Y-M-D')) {
-      this.globalTimer.dates[moment().format('Y-M-D')] = this.globalTimer.today;
+    if (today === from.format(this.globalTimer.dateFormat)) {
+      this.globalTimer.dates[moment().format(this.globalTimer.dateFormat)] = this.globalTimer.today;
       this.globalTimer.updateGlobalTimer({dates: this.globalTimer.dates});
     }
   }

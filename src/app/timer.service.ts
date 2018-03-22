@@ -34,7 +34,9 @@ export class TimerService {
 
   globalTimer: any
 
-  localStorageName: string = 'globalTimer';
+  localStorageName: string = 'globalTimer'
+
+  dateFormat: string = 'Y-M-D'
 
   constructor(@Optional() isLocalTimer: boolean = false) {
     if (!isLocalTimer) {
@@ -48,7 +50,7 @@ export class TimerService {
                       null;
 
     if (!this.globalTimer) {
-      this.createdAt = moment().format('Y-M-D');
+      this.createdAt = moment().format(this.dateFormat);
       this.updateGlobalTimer();
     } else {
       this.globalTimer.counter.isOn = false;

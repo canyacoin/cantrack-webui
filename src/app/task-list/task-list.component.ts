@@ -71,7 +71,7 @@ export class TaskListComponent implements OnInit {
 
     this.taskRef.instance.id = this.prevTaskIndex;
 
-    this.taskRef.instance.description = description;
+    this.taskRef.instance.description = description || '';
 
     this.tasks[this.prevTaskIndex] = this.taskRef;
 

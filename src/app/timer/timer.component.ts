@@ -13,7 +13,12 @@ export class TimerComponent implements OnInit {
   constructor(public globalTimer: TimerService) { }
 
   ngOnInit() {
-    this.initTimeline();
+    let today = moment().format(this.globalTimer.dateFormat);
+    if (this.globalTimer.dates[today]) {
+      this.globalTimer.today = this.globalTimer.dates[today];
+    } else {
+      this.initTimeline();
+    }
   }
 
   initTimeline() {

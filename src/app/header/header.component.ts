@@ -16,4 +16,14 @@ export class HeaderComponent implements OnInit {
     (<any>window).print();
   }
 
+  onPreview() {
+    Array.from(document.querySelectorAll('.task-list app-task')).forEach(task => {
+      task.classList.remove('col-3');
+      task.classList.add('col-12');
+      task.querySelector('.timer-trigger-wrapper').classList.add('d-none');
+      task.querySelector('.card-footer').classList.add('time-sm');
+    }));
+    document.querySelector('.new-task-wrapper').classList.add('d-none');
+  }
+
 }

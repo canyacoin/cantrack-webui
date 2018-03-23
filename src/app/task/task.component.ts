@@ -11,13 +11,9 @@ import * as moment from 'moment';
 
 export class TaskComponent implements OnInit {
 
-  @ViewChild("subTask", { read: ViewContainerRef }) container
-
   @ViewChild("taskDescription", { read: ViewContainerRef }) textarea
 
   @Input() localTimer: TimerService
-
-  subTaskRef: ComponentRef<any>
 
   taskList: any
 
@@ -26,10 +22,6 @@ export class TaskComponent implements OnInit {
   id: number
 
   time: number = 0
-
-  subTasks = {}
-
-  prevSubTaskIndex = 0
 
   maxRowLength: number = 17
 
@@ -75,6 +67,10 @@ export class TaskComponent implements OnInit {
 
     this.description = tasks[this.id].description || this.description;
 
+    this.setTextareaHeight();
+  }
+
+  setTextareaHeight() {
     let textarea = this.textarea.element.nativeElement;
 
     let maxRowLength = this.maxRowLength;
@@ -88,32 +84,12 @@ export class TaskComponent implements OnInit {
     }, 500);
   }
 
-  createSubTask() {
-    const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(SubTaskComponent);
-
-    this.subTaskRef = this.container.createComponent(factory);
-
-    this.subTaskRef.instance.parentTask = this;
-
-    this.subTaskRef.instance.id = this.prevSubTaskIndex;
-
-    this.subTaskRef.location.nativeElement.querySelector('textarea').focus();
-
-    this.subTasks[this.prevSubTaskIndex] = this.subTaskRef;
-
-    this.prevSubTaskIndex++;
-  }
-
   add() {
     this.taskList.createTask();
   }
 
   remove() {
     this.taskList.removeTask(this.id);
-  }
-
-  removeSubTask(id: number) {
-    this.subTasks[id].destroy();
   }
 
   store() {
@@ -220,7 +196,5 @@ export class TaskComponent implements OnInit {
   onTab(e) {
     e.preventDefault();
     this.taskList.createTask();
-    // this.createSubTask();
   }
-
 }

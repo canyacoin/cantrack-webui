@@ -10,6 +10,10 @@
   .time {
     font-size: $h5-font-size;
     font-weight: 600;
+    &.time-sm {
+      padding-bottom: get-spacer(1);
+      padding-top: get-spacer(1);
+    }
   }
   .timer-trigger-wrapper {
     text-align: center;

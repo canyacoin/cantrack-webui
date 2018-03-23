@@ -1,5 +1,5 @@
 <header class="global-time">
-  <div class="timeline-wrapper">
+  <div class="timeline-wrapper d-print-none">
     <ul class="timeline">
       <li *ngFor="let h of globalTimer.today; let $i = index" [attr.width]="h.width">
         <span *ngIf="h.display">{{ h.hour }}</span>

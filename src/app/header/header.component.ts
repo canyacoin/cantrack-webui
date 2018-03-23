@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
       task.querySelector('.card-footer').classList.add('time-sm');
 
       this.setTaskTextareaHeight(task.querySelector('textarea'), 100);
-    }));
+    });
     document.querySelector('.new-task-wrapper').classList.add('d-none');
 
     this.isInPreviewMode = true;
@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
       task.querySelector('.card-footer').classList.remove('time-sm');
 
       this.setTaskTextareaHeight(task.querySelector('textarea'), 17);
-    }));
+    });
     document.querySelector('.new-task-wrapper').classList.remove('d-none');
 
     this.isInPreviewMode = false;

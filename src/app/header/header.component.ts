@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  isInPreviewMode: boolean = false
+
   constructor() { }
 
   ngOnInit() {
@@ -22,8 +24,32 @@ export class HeaderComponent implements OnInit {
       task.classList.add('col-12');
       task.querySelector('.timer-trigger-wrapper').classList.add('d-none');
       task.querySelector('.card-footer').classList.add('time-sm');
+
+      this.setTaskTextareaHeight(task.querySelector('textarea'), 100);
     }));
     document.querySelector('.new-task-wrapper').classList.add('d-none');
+
+    this.isInPreviewMode = true;
+  }
+
+  onExitPreview() {
+    Array.from(document.querySelectorAll('.task-list app-task')).forEach(task => {
+      task.classList.remove('col-12');
+      task.classList.add('col-3');
+      task.querySelector('.timer-trigger-wrapper').classList.remove('d-none');
+      task.querySelector('.card-footer').classList.remove('time-sm');
+
+      this.setTaskTextareaHeight(task.querySelector('textarea'), 17);
+    }));
+    document.querySelector('.new-task-wrapper').classList.remove('d-none');
+
+    this.isInPreviewMode = false;
+  }
+
+  setTaskTextareaHeight(textarea, maxRowLength) {
+    let textLength = textarea.textLength;
+
+    textarea.rows = Math.floor((textLength/maxRowLength) % maxRowLength) + 1;
   }
 
 }

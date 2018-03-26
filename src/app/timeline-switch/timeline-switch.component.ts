@@ -12,7 +12,7 @@ export class TimelineSwitchComponent implements OnInit {
 
   date: string = 'Today'
 
-  previousDate: any
+  previousDate: string
 
   displayPrevious: boolean = false
 
@@ -21,36 +21,52 @@ export class TimelineSwitchComponent implements OnInit {
   constructor(public globalTimer: TimerService) {}
 
   ngOnInit() {
-    this.previousDate = this.previousDate || moment();
+    this.previousDate = this.previousDate || moment().format(this.globalTimer.dateFormat);
+
+    this.onChange();
   }
 
-  onPrevious() {
-    this.displayPrevious = this.globalTimer.createdAt != this.previousDate.format(this.globalTimer.dateFormat);
+  private getDateObject(date: string) {
+    return moment(date);
   }
 
-  onNext() {
-    let nextDay = this.previousDate.add(1, 'days').format(this.globalTimer.dateFormat);
-    this.displayNext = this.globalTimer.dates[nextDay] != undefined;
+  private getPreviousDateObject() {
+    return moment(this.previousDate, this.globalTimer.dateFormat);
+  }
+
+  onChange() {
+    this.displayPrevious = this.globalTimer.createdAt != this.previousDate;
+
+    let today = moment().format(this.globalTimer.dateFormat);
+    this.displayNext = this.previousDate != today;
   }
 
   nextDate() {
-    let nextDay = this.previousDate.add(1, 'days');
+    let previousDate = this.getPreviousDateObject();
+
+    let nextDay = previousDate.add(1, 'days');
 
     this.setDateString(nextDay);
 
     this.globalTimer.today = this.globalTimer.dates[nextDay.format(this.globalTimer.dateFormat)];
 
-    this.onNext();
+    this.previousDate = nextDay.format(this.globalTimer.dateFormat);
+
+    this.onChange();
   }
 
   prevDate() {
-    let prevDay = this.previousDate.subtract(1, 'days');
+    let previousDate = this.getPreviousDateObject();
+
+    let prevDay = previousDate.subtract(1, 'days');
 
     this.setDateString(prevDay);
 
     this.globalTimer.today = this.globalTimer.dates[prevDay.format(this.globalTimer.dateFormat)];
 
-    this.onPrevious();
+    this.previousDate = prevDay.format(this.globalTimer.dateFormat);
+
+    this.onChange();
   }
 
   setDateString(date) {

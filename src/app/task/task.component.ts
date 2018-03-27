@@ -147,7 +147,9 @@ export class TaskComponent implements OnInit {
     let div = diff / secondsInHour;
     let width = div > 1 ? 100 : (div * 1000);
 
-    let hour = this.globalTimer.today[from.format('H')];
+    let today = moment().format(this.globalTimer.dateFormat);
+
+    let hour = this.globalTimer.dates[today][from.format('H')];
 
     hour.ranges.push({
       width: `${width}%`,
@@ -158,10 +160,8 @@ export class TaskComponent implements OnInit {
 
     hour.display = true;
 
-    let today = moment().format(this.globalTimer.dateFormat);
-
     if (today === from.format(this.globalTimer.dateFormat)) {
-      this.globalTimer.dates[today] = this.globalTimer.today;
+      this.globalTimer.dates[today][from.format('H')] = hour;
       this.globalTimer.updateGlobalTimer({dates: this.globalTimer.dates});
     }
   }

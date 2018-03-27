@@ -28,7 +28,7 @@ export class TimerComponent implements OnInit {
       let hour = moment().startOf('day').add(i, 'hour').format('ha');
       this.globalTimer.today.push({
         hour: hour,
-        display: (i == 0 || i == hours) ? true : false,
+        display: false,
         width: `${100 / hours}%`,
         ranges: [],
       })

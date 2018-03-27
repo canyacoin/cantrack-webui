@@ -11,8 +11,10 @@
       </div>
     </div>
     <ul class="timeline d-print-none">
-      <li *ngFor="let h of globalTimer.today; let $i = index" [attr.width]="h.width">
-        <span *ngIf="h.display">{{ h.hour }}</span>
+      <li *ngFor="let h of globalTimer.today; let $i = index"
+        [attr.width]="h.width"
+        [style.display]="h.display ? 'block' : 'none'">
+        <span>{{ h.hour }}</span>
         <div class="ranges">
           <span *ngFor="let range of h.ranges"
             [style.width]="range.width"

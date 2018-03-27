@@ -1,4 +1,4 @@
-<article class="card task mb-3" [style.borderTopColor]="taskColor">
+<article class="card task mb-3 {{ onPreviewMode(id) }}" [style.borderTopColor]="taskColor">
   <span class="remove-task" (click)="remove()"><i class="fa fa-times-circle"></i></span>
   <div class="card-body">
     <div class="description">
@@ -14,6 +14,13 @@
     </div>
     <div class="timer-trigger-wrapper">
       <app-timer-trigger *ngIf="localTimer" [timer]="localTimer" [color]="taskColor"></app-timer-trigger>
+    </div>
+    <div class="preview-mode-wrapper">
+      <ul>
+        <li *ngFor="let range of localTimer.counter.ranges">
+          {{ range.from }} {{ range.to }}
+        </li>
+      </ul>
     </div>
   </div>
   <div class="card-footer text-muted time text-center">

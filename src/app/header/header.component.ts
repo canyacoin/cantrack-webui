@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PreviewService } from '../preview.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ export class HeaderComponent implements OnInit {
 
   isInPreviewMode: boolean = false
 
-  constructor() { }
+  constructor(public previewService: PreviewService) {}
 
   ngOnInit() {
   }
@@ -19,6 +20,8 @@ export class HeaderComponent implements OnInit {
   }
 
   onPreview() {
+    this.previewService.turnOn();
+
     Array.from(document.querySelectorAll('.task-list app-task')).forEach(task => {
       task.classList.remove('col-3');
       task.classList.add('col-12');
@@ -37,6 +40,8 @@ export class HeaderComponent implements OnInit {
   }
 
   onExitPreview() {
+    this.previewService.turnOff();
+
     Array.from(document.querySelectorAll('.task-list app-task')).forEach(task => {
       task.classList.remove('col-12');
       task.classList.add('col-3');

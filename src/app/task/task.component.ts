@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ComponentFactory, ComponentRef, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { TimerService } from '../timer.service';
+import { PreviewService } from '../preview.service';
 import { SubTaskComponent } from '../sub-task/sub-task.component';
 import * as moment from 'moment';
 
@@ -29,13 +30,21 @@ export class TaskComponent implements OnInit {
 
   taskColor: string
 
+  previewModeIsOn: boolean = false
+
   constructor(
     public globalTimer: TimerService,
-    private resolver: ComponentFactoryResolver) {
+    private resolver: ComponentFactoryResolver,
+    public previewService: PreviewService) {
+
     this.localTimer = new TimerService(true);
     this.localTimer.counter.isLocalTimer = true;
     this.localTimer.task = this;
     this.globalTimer.addLocalTimer(this.localTimer);
+
+    previewService.isOn.subscribe((previewServiceIsOn: boolean) => {
+      this.previewModeIsOn = previewServiceIsOn;
+    });
   }
 
   ngOnInit() {
@@ -46,6 +55,16 @@ export class TaskComponent implements OnInit {
     this.setCurrentTime();
 
     this.setDescription();
+  }
+
+  onPreviewMode(id: number) {
+    if (!this.previewModeIsOn) return;
+
+    let tasks = JSON.parse(localStorage.getItem(this.taskList.localTaskListName)).tasks;
+
+    let task = tasks[id];
+
+    return (task.ranges.length <= 0) ? 'd-none' : 'preview-mode';
   }
 
   setTaskColor() {

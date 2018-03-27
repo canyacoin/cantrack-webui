@@ -50,6 +50,19 @@
       display: block;
     }
   }
+
+  .preview-mode-wrapper {
+    display: none;
+  }
+
+  &.preview-mode {
+    .card-footer {
+      display: none;
+    }
+    .preview-mode-wrapper {
+      display: block;
+    }
+  }
 }
 
 .task-row {

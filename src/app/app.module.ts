@@ -13,6 +13,7 @@ import { SubTaskComponent } from './sub-task/sub-task.component';
 import { TimerService } from './timer.service';
 import { TimerTriggerComponent } from './timer-trigger/timer-trigger.component';
 import { TimelineSwitchComponent } from './timeline-switch/timeline-switch.component';
+import { PreviewService } from './preview.service';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { TimelineSwitchComponent } from './timeline-switch/timeline-switch.compo
     FormsModule
   ],
   providers: [
-    TimerService
+    TimerService,
+    PreviewService
   ],
   bootstrap: [AppComponent],
   entryComponents: [TaskComponent, SubTaskComponent]

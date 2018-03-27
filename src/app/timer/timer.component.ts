@@ -10,14 +10,18 @@ import * as moment from 'moment';
 
 export class TimerComponent implements OnInit {
 
-  constructor(public globalTimer: TimerService) { }
+  today: string
+
+  constructor(public globalTimer: TimerService) {
+    this.today = moment().format(this.globalTimer.dateFormat);
+  }
 
   ngOnInit() {
-    let today = moment().format(this.globalTimer.dateFormat);
-    if (this.globalTimer.dates[today]) {
-      this.globalTimer.today = this.globalTimer.dates[today];
+    if (this.globalTimer.dates[this.today]) {
+      this.globalTimer.today = this.globalTimer.dates[this.today];
     } else {
       this.initTimeline();
+      this.globalTimer.dates[this.today] = this.globalTimer.today;
     }
   }
 
@@ -31,7 +35,7 @@ export class TimerComponent implements OnInit {
         display: false,
         width: `${100 / hours}%`,
         ranges: [],
-      })
+      });
     }
   }
 

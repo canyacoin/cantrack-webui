@@ -18,6 +18,13 @@
       font-size: $h5-font-size;
     }
   }
+
+  .counter {
+    .title {
+      margin-bottom: get-spacer(4);
+    }
+  }
+
   .actions {
 
   }

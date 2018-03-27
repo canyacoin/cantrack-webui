@@ -15,10 +15,12 @@
     <div class="timer-trigger-wrapper">
       <app-timer-trigger *ngIf="localTimer" [timer]="localTimer" [color]="taskColor"></app-timer-trigger>
     </div>
-    <div class="preview-mode-wrapper">
+    <div class="preview-mode-wrapper" *ngIf="previewModeIsOn">
       <ul>
         <li *ngFor="let range of localTimer.counter.ranges">
-          {{ range.from }} {{ range.to }}
+          <span><strong>{{ [range.from, range.to] | datesDifference }}</strong>, </span>
+          <span><strong>from: </strong>{{ range.from | date:'medium' }}, </span>
+          <span><strong>to: </strong> {{ range.to | date:'medium' }}</span>
         </li>
       </ul>
     </div>

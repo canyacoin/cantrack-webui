@@ -14,6 +14,7 @@ import { TimerService } from './timer.service';
 import { TimerTriggerComponent } from './timer-trigger/timer-trigger.component';
 import { TimelineSwitchComponent } from './timeline-switch/timeline-switch.component';
 import { PreviewService } from './preview.service';
+import { DatesDifferencePipe } from './dates-difference.pipe';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { PreviewService } from './preview.service';
     TaskComponent,
     SubTaskComponent,
     TimerTriggerComponent,
-    TimelineSwitchComponent
+    TimelineSwitchComponent,
+    DatesDifferencePipe
   ],
   imports: [
     BrowserModule,

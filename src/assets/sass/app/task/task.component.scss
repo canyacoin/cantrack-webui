@@ -60,7 +60,17 @@
       display: none;
     }
     .preview-mode-wrapper {
+      padding: get-spacer(3);
       display: block;
+      ul {
+        @include list-unstyled;
+        li {
+          > span {
+            margin-right: get-spacer(2);
+            display: inline-block;
+          }
+        }
+      }
     }
   }
 }

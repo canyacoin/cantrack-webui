@@ -11,10 +11,10 @@
 
     <div class="topbar-right d-print-none">
       <button *ngIf="isInPreviewMode" class="btn btn-sm btn-danger" (click)="onPrint()">
-        PRINT
+        Publish &amp; PRINT
       </button>
       <button *ngIf="!isInPreviewMode" class="btn btn-sm btn-outline btn-primary" (click)="onPreview()">
-        Preview and print
+        Preview
       </button>
       <button *ngIf="isInPreviewMode" class="btn btn-sm btn-outline btn-primary" (click)="onExitPreview()">
         Exit preview mode

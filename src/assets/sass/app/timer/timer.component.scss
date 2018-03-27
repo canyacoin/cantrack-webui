@@ -37,12 +37,31 @@
   .timeline {
     @include flex-row-space-between;
     @include list-unstyled;
+    background-color: $gray-100;
+    position: relative;
+    height: 56px;
+    width: 100%;
+    &:before,
+    &:after {
+      position: absolute;
+      content: '12am';
+      color: $gray-300;
+      z-index: 1;
+      top: 3px;
+    }
+    &:before {
+      left: 7px;
+    }
+    &:after {
+      right: 7px;
+    }
     li {
       border-right: 1px solid white;
       background-color: $gray-100;
       position: relative;
       flex-grow: 1;
       height: 56px;
+      z-index: 10;
       &:hover {
         @include box-shadow-default;
         flex-grow: 11;

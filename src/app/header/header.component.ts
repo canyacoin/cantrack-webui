@@ -35,6 +35,7 @@ export class HeaderComponent implements OnInit {
     document.querySelector('#canya-cta').classList.add('d-none');
     document.querySelector('.tasks-title').classList.remove('d-none');
     document.querySelector('.timeline').classList.add('d-none');
+    document.querySelector('.date-wrapper').classList.add('d-none');
 
     this.isInPreviewMode = true;
   }
@@ -55,6 +56,7 @@ export class HeaderComponent implements OnInit {
     document.querySelector('.counter').classList.add('d-none');
     document.querySelector('.tasks-title').classList.add('d-none');
     document.querySelector('.timeline').classList.remove('d-none');
+    document.querySelector('.date-wrapper').classList.remove('d-none');
 
     this.isInPreviewMode = false;
   }

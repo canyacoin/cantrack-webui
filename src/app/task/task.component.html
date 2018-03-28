@@ -15,7 +15,8 @@
     <div class="timer-trigger-wrapper">
       <app-timer-trigger *ngIf="localTimer" [timer]="localTimer" [color]="taskColor"></app-timer-trigger>
     </div>
-    <div class="preview-mode-wrapper" *ngIf="previewModeIsOn">
+    <div class="preview-mode-wrapper" *ngIf="previewModeIsOn && localTimer.counter.ranges.length > 0">
+      <h6><strong>Total: {{ localTimer.counter.ranges | datesDifference:'sum' }}</strong></h6>
       <ul>
         <li *ngFor="let range of localTimer.counter.ranges">
           <span><strong>{{ [range.from, range.to] | datesDifference }}</strong>, </span>

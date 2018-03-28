@@ -151,10 +151,8 @@
   }
 }
 
-.site-footer {
-  .file-signature {
-    margin-bottom: get-spacer(3);
-    font-size: $h4-font-size;
-    text-align: center;
-  }
+.file-signature {
+  margin-bottom: get-spacer(3);
+  font-size: $h4-font-size;
+  text-align: center;
 }

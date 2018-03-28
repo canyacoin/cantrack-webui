@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ComponentFactory, ComponentRef, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { TaskComponent } from '../task/task.component';
+import { TimerService } from '../timer.service';
 import { IdleTaskService } from '../idle-task.service';
 import * as moment from 'moment';
 
@@ -36,7 +37,8 @@ export class TaskListComponent implements OnInit {
 
   constructor(
     private resolver: ComponentFactoryResolver,
-    private idleTaskService: IdleTaskService) {
+    private idleTaskService: IdleTaskService,
+    public globalTimer: TimerService) {
 
     this.localTaskList = localStorage.getItem(this.localTaskListName) ? JSON.parse(localStorage.getItem(this.localTaskListName)) : null;
 
@@ -48,7 +50,6 @@ export class TaskListComponent implements OnInit {
     idleTaskService.isIdle.subscribe((idleTask: any) => {
       if (idleTask.addTime) {
         this.addTimeToTask(idleTask);
-        console.log(idleTask);
       }
 
       if (idleTask.removeTime) {
@@ -74,6 +75,12 @@ export class TaskListComponent implements OnInit {
               task.idleFrom = range.from;
               task.idleTo = moment().format();
               task.idleRangeIndex = index;
+
+              let from = moment(range.from);
+              let to = moment(task.idleTo);
+              let diff = (to.unix() - from.unix()) * 1000;
+              task.idleTimeDifference = diff;
+
               this.idleTaskService.hasIdleTask(task);
             }
           });
@@ -126,14 +133,18 @@ export class TaskListComponent implements OnInit {
     task.save();
     this.updateLocalTaskList();
 
+    task.updateLocalTime(_task.idleTimeDifference);
+    task.localTimer.counter.prev += _task.idleTimeDifference;
+    task.localTimer.setTime();
+    this.globalTimer.counter.prev += _task.idleTimeDifference;
+    this.globalTimer.updateGlobalTimer();
+
     task.updateGlobalRanges();
 
     _task.isIdle = false;
     _task.addTime = false;
     _task.removeTime = false;
     this.idleTaskService.hasIdleTask(_task);
-    // setTimeout(() => {
-    // }, 1000);
   }
 
   updateLocalTaskList() {

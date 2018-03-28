@@ -175,7 +175,7 @@ export class TaskComponent implements OnInit {
     let secondsInHour = 60 * 60;
 
     let from = moment(lastRange.from);
-    let to = moment(lastRange.to || from.add(1, 'minute'));
+    let to = moment(lastRange.to);
     let diff = to.unix() - from.unix();
     let div = diff / secondsInHour;
     let width = div > 1 ? 100 : (div * 1000);

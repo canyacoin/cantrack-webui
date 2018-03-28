@@ -15,6 +15,8 @@ import { TimerTriggerComponent } from './timer-trigger/timer-trigger.component';
 import { TimelineSwitchComponent } from './timeline-switch/timeline-switch.component';
 import { PreviewService } from './preview.service';
 import { DatesDifferencePipe } from './dates-difference.pipe';
+import { IdleTaskService } from './idle-task.service';
+import { IdleTaskModalComponent } from './idle-task-modal/idle-task-modal.component';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { DatesDifferencePipe } from './dates-difference.pipe';
     SubTaskComponent,
     TimerTriggerComponent,
     TimelineSwitchComponent,
-    DatesDifferencePipe
+    DatesDifferencePipe,
+    IdleTaskModalComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { DatesDifferencePipe } from './dates-difference.pipe';
   ],
   providers: [
     TimerService,
-    PreviewService
+    PreviewService,
+    IdleTaskService
   ],
   bootstrap: [AppComponent],
   entryComponents: [TaskComponent, SubTaskComponent]

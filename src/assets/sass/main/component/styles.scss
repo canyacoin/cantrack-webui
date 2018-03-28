@@ -26,6 +26,10 @@
 // @import "./src/assets/sass/theme/form/input";
 // @import "./src/assets/sass/theme/form/control";
 
+body {
+  position: relative;
+}
+
 .site-wrapper {
   background-color: $gray-100;
   min-height: 100vh;
@@ -155,4 +159,22 @@
   margin-bottom: get-spacer(3);
   font-size: $h4-font-size;
   text-align: center;
+}
+
+.idle-task-modal {
+  @include flex-column-center;
+  background-color: rgba($black, 0.7);
+  position: fixed;
+  z-index: 100000;
+  height: 100%;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  .idle-task-wrapper {
+    border-radius: $border-radius-lg;
+    background-color: white;
+    padding: get-spacer(3);
+    min-height: 350px;
+  }
 }

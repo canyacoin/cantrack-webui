@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ComponentFactory, ComponentRef, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { TaskComponent } from '../task/task.component';
+import { IdleTaskService } from '../idle-task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -30,17 +31,51 @@ export class TaskListComponent implements OnInit {
     'Another task...',
   ];
 
-  constructor(private resolver: ComponentFactoryResolver) {
+  taskIsIdle: boolean = false
+
+  constructor(
+    private resolver: ComponentFactoryResolver,
+    private idleTaskService: IdleTaskService) {
     this.localTaskList = localStorage.getItem(this.localTaskListName) ? JSON.parse(localStorage.getItem(this.localTaskListName)) : null;
 
     if (!this.localTaskList) {
       localStorage.setItem(this.localTaskListName, JSON.stringify({tasks: {}}));
       this.updateLocalTaskList();
     }
+
+    idleTaskService.isIdle.subscribe((idleTask: any) => {
+      if (idleTask.addTime) {
+        console.log(idleTask);
+      }
+
+      if (idleTask.remove) {
+        console.log(idleTask);
+      }
+    });
   }
 
   ngOnInit() {
     this.loadLocalTasks();
+    this.checkForIdleTasks();
+  }
+
+  checkForIdleTasks() {
+    let tasks = this.localTaskList.tasks;
+    if (Object.keys(tasks).length > 0) {
+      Object.keys(tasks).forEach(key => {
+        if (tasks[key].ranges && tasks[key].ranges.length > 0) {
+          tasks[key].ranges.forEach((range, index) => {
+            if (!range.to) {
+              let task = tasks[key];
+              task.hasIdleTask = true;
+              task.idleFrom = range.from;
+              task.idleRangeIndex = index;
+              this.idleTaskService.hasIdleTask(task);
+            }
+          });
+        }
+      });
+    }
   }
 
   loadLocalTasks() {

@@ -7,7 +7,7 @@ import * as moment from 'moment';
 
 export class DatesDifferencePipe implements PipeTransform {
 
-  transform(value: any, action?: string = 'diff'): string {
+  transform(value: any, action?: string): string {
 
     if (action === 'sum') {
       let result = value.reduce((acc, current, index, arr) => {

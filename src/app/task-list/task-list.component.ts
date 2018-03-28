@@ -53,7 +53,7 @@ export class TaskListComponent implements OnInit {
       }
 
       if (idleTask.removeTime) {
-        console.log(idleTask);
+        this.removeTimeFromTask(idleTask);
       }
     });
   }
@@ -78,7 +78,7 @@ export class TaskListComponent implements OnInit {
 
               let from = moment(range.from);
               let to = moment(task.idleTo);
-              let diff = (to.unix() - from.unix()) * 1000;
+              let diff = moment.duration(to.diff(from)).asMilliseconds();
               task.idleTimeDifference = diff;
 
               this.idleTaskService.hasIdleTask(task);
@@ -131,15 +131,44 @@ export class TaskListComponent implements OnInit {
     ranges[_task.idleRangeIndex].to = _task.idleTo;
 
     task.save();
-    this.updateLocalTaskList();
 
-    task.updateLocalTime(_task.idleTimeDifference);
-    task.localTimer.counter.prev += _task.idleTimeDifference;
+    let diff = _task.idleTimeDifference - task.time;
+    task.localTimer.counter.prev += diff;
     task.localTimer.setTime();
-    this.globalTimer.counter.prev += _task.idleTimeDifference;
-    this.globalTimer.updateGlobalTimer();
 
+    this.globalTimer.counter.prev += diff;
+    this.globalTimer.updateGlobalTimer();
+    this.globalTimer.setTime();
+
+    this.updateLocalTaskList();
     task.updateGlobalRanges();
+
+    _task.isIdle = false;
+    _task.addTime = false;
+    _task.removeTime = false;
+    this.idleTaskService.hasIdleTask(_task);
+  }
+
+  removeTimeFromTask(_task) {
+    let task = this.tasks[_task.id].instance;
+
+    let ranges = task.localTimer.counter.ranges;
+    ranges.splice(_task.idleRangeIndex, 1);
+
+    task.save();
+
+    let diff = task.localTimer.counter.prev - _task.idleTimeDifference;
+    let time = (diff <= 0) ? 0 : diff;
+
+    task.updateLocalTime(time);
+    task.localTimer.counter.prev -= time;
+    task.localTimer.setTime();
+
+    this.globalTimer.counter.prev -= time;
+    this.globalTimer.updateGlobalTimer();
+    this.globalTimer.setTime();
+
+    this.updateLocalTaskList();
 
     _task.isIdle = false;
     _task.addTime = false;

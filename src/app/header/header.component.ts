@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PreviewService } from '../preview.service';
+import { EthereumService } from '../ethereum.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,9 @@ export class HeaderComponent implements OnInit {
 
   isInPreviewMode: boolean = false
 
-  constructor(public previewService: PreviewService) {}
+  constructor(
+    public previewService: PreviewService,
+    public ethereumService: EthereumService) {}
 
   ngOnInit() {
   }

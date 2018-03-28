@@ -17,6 +17,7 @@ import { PreviewService } from './preview.service';
 import { DatesDifferencePipe } from './dates-difference.pipe';
 import { IdleTaskService } from './idle-task.service';
 import { IdleTaskModalComponent } from './idle-task-modal/idle-task-modal.component';
+import { EthereumService } from './ethereum.service';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { IdleTaskModalComponent } from './idle-task-modal/idle-task-modal.compon
   providers: [
     TimerService,
     PreviewService,
-    IdleTaskService
+    IdleTaskService,
+    EthereumService
   ],
   bootstrap: [AppComponent],
   entryComponents: [TaskComponent, SubTaskComponent]

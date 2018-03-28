@@ -17,13 +17,13 @@ export class IdleTaskService {
 
   addTimeToTask() {
     this.task.addTime = true;
-    this.task.remove = false;
+    this.task.removeTime = false;
     this.isIdle.next(this.task);
   }
 
   removeTimeFromTask() {
     this.task.addTime = false;
-    this.task.remove = true;
+    this.task.removeTime = true;
     this.isIdle.next(this.task);
   }
 

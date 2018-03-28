@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ComponentFactory, ComponentRef, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { TaskComponent } from '../task/task.component';
 import { IdleTaskService } from '../idle-task.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-task-list',
@@ -36,6 +37,7 @@ export class TaskListComponent implements OnInit {
   constructor(
     private resolver: ComponentFactoryResolver,
     private idleTaskService: IdleTaskService) {
+
     this.localTaskList = localStorage.getItem(this.localTaskListName) ? JSON.parse(localStorage.getItem(this.localTaskListName)) : null;
 
     if (!this.localTaskList) {
@@ -45,10 +47,11 @@ export class TaskListComponent implements OnInit {
 
     idleTaskService.isIdle.subscribe((idleTask: any) => {
       if (idleTask.addTime) {
+        this.addTimeToTask(idleTask);
         console.log(idleTask);
       }
 
-      if (idleTask.remove) {
+      if (idleTask.removeTime) {
         console.log(idleTask);
       }
     });
@@ -67,8 +70,9 @@ export class TaskListComponent implements OnInit {
           tasks[key].ranges.forEach((range, index) => {
             if (!range.to) {
               let task = tasks[key];
-              task.hasIdleTask = true;
+              task.isIdle = true;
               task.idleFrom = range.from;
+              task.idleTo = moment().format();
               task.idleRangeIndex = index;
               this.idleTaskService.hasIdleTask(task);
             }
@@ -113,6 +117,25 @@ export class TaskListComponent implements OnInit {
     this.prevTaskIndex++;
   }
 
+  addTimeToTask(_task) {
+    let task = this.tasks[_task.id].instance;
+
+    let ranges = task.localTimer.counter.ranges;
+    ranges[_task.idleRangeIndex].to = _task.idleTo;
+
+    task.save();
+    this.updateLocalTaskList();
+
+    task.updateGlobalRanges();
+
+    _task.isIdle = false;
+    _task.addTime = false;
+    _task.removeTime = false;
+    this.idleTaskService.hasIdleTask(_task);
+    // setTimeout(() => {
+    // }, 1000);
+  }
+
   updateLocalTaskList() {
     this.localTaskList = JSON.parse(localStorage.getItem(this.localTaskListName));
   }
@@ -124,13 +147,4 @@ export class TaskListComponent implements OnInit {
     this.updateLocalTaskList();
   }
 }
-
-
-
-
-
-
-
-
-
 

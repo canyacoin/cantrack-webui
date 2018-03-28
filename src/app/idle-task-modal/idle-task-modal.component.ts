@@ -18,9 +18,9 @@ export class IdleTaskModalComponent implements OnInit {
   constructor(public idleTaskService: IdleTaskService) {
     this.now = moment().format();
 
-    idleTaskService.isIdle.subscribe((idleTask: any) => {
-      this.hasIdleTask = idleTask.hasIdleTask;
-      this.task = idleTask;
+    idleTaskService.isIdle.subscribe((task: any) => {
+      this.hasIdleTask = task.isIdle;
+      this.task = task;
     });
   }
 

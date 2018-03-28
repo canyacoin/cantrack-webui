@@ -111,6 +111,20 @@ export class TaskComponent implements OnInit {
     this.taskList.removeTask(this.id);
   }
 
+  save() {
+    let tasks = JSON.parse(localStorage.getItem(this.taskList.localTaskListName)).tasks;
+
+    tasks[this.id] = {
+      id: this.id,
+      description: this.description,
+      time: this.time,
+      color: this.taskColor,
+      ranges: this.localTimer.counter.ranges,
+    };
+
+    localStorage.setItem(this.taskList.localTaskListName, JSON.stringify({tasks: tasks}));
+  }
+
   store() {
     let tasks = JSON.parse(localStorage.getItem(this.taskList.localTaskListName)).tasks;
 

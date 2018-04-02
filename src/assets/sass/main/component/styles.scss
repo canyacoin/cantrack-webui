@@ -161,7 +161,7 @@ body {
   text-align: center;
 }
 
-.idle-task-modal {
+.modal {
   @include flex-column-center;
   background-color: rgba($black, 0.7);
   position: fixed;
@@ -171,7 +171,7 @@ body {
   right: 0;
   left: 0;
   top: 0;
-  .idle-task-wrapper {
+  .modal-body {
     border-radius: $border-radius-lg;
     background-color: white;
     padding: get-spacer(3);

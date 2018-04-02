@@ -4,21 +4,16 @@ import { Observable, Subject } from 'rxjs';
 @Injectable()
 export class PreviewService {
 
-  isOn: Observable<boolean>
+  isOn: Subject<any> = new Subject<any>()
 
-  isOnSubject: Subject<boolean>
-
-  constructor() {
-    this.isOnSubject = new Subject<boolean>();
-    this.isOn = this.isOnSubject.asObservable();
-  }
+  constructor() {}
 
   turnOn() {
-    this.isOnSubject.next(true);
+    this.isOn.next(true);
   }
 
   turnOff() {
-    this.isOnSubject.next(false);
+    this.isOn.next(false);
   }
 
 }

@@ -30,13 +30,4 @@ export class IdleTaskModalComponent implements OnInit {
   close() {
     this.hasIdleTask = false;
   }
-
-  addTimeToTask() {
-
-  }
-
-  removeTimeFromTask() {
-
-  }
-
 }

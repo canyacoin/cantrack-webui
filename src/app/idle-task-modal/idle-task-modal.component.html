@@ -1,8 +1,8 @@
-<div class="idle-task-modal" *ngIf="hasIdleTask">
+<div class="modal" *ngIf="hasIdleTask">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-6">
-        <div class="idle-task-wrapper">
+        <div class="modal-body">
           <h4>The task:</h4>
           <h5 style="border-left: 7px solid;" [style.borderColor]="task.color">&nbsp;&nbsp;{{ task.description }}</h5>
           <p>Has been idle for {{ [task.idleFrom, now] | datesDifference }}.</p>

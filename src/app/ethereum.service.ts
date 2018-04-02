@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const CANTRACK_JSON_ID = 'CANTRACK';
-const CANTRACK_CONTRACT_ADDRESS = '0x5276bf77cd5befbf6e8a3d4625e01ee8ed889937';
+const CANTRACK_CONTRACT_ADDRESS = '0x872d443291bad3ea04bddfed97fdd57cf76a4329';
 
 declare var window: any;
 
@@ -93,13 +93,13 @@ export class EthereumService {
       JSON.stringify(contractData),
       txOptions,
       (error, result) => {
-        if (error) console.log(error);
+        if (error) {
+          console.log(error);
+          // TODO: handle txn error
+        }
 
         console.log(result);
     });
-
-
-    // console.log(JSON.stringify(contractData));
   }
 
   filterEmptyGlobalTimerRanges({counter, createdAt, dates}) {

@@ -2,16 +2,14 @@ import { Injectable } from '@angular/core';
 import { PreviewService } from './preview.service';
 import { TimerService } from './timer.service';
 
+const CANTRACK_JSON_ID = 'CANTRACK';
+
 @Injectable()
 export class EthereumService {
 
   constructor(
     private globalTimer: TimerService,
-    private previewService: PreviewService) {
-
-
-
-  }
+    private previewService: PreviewService) {}
 
   onPublish() {
     let globalTimer = JSON.parse(localStorage[this.globalTimer.localStorageName]);
@@ -19,6 +17,7 @@ export class EthereumService {
     let tasks = JSON.parse(localStorage['taskList']).tasks;
 
     let contractData = {
+      id: CANTRACK_JSON_ID,
       globalTimer: this.filterEmptyGlobalTimerRanges(globalTimer),
       taskList: this.filterEmptyTasksRanges(tasks)
     }

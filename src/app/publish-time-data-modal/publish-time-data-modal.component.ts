@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { EthereumService } from '../ethereum.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class PublishTimeDataModalComponent implements OnInit {
 
   txn: any
 
-  constructor(public ethereumService: EthereumService) {
+  constructor(public ethereumService: EthereumService, public zone: NgZone) {
     this.ethereumService.beforePublishing.subscribe(beforePublishing => {
       this.isPublishing = beforePublishing.isModalOpen;
     });
@@ -33,12 +33,13 @@ export class PublishTimeDataModalComponent implements OnInit {
     });
 
     this.ethereumService.afterPublishing.subscribe(afterPublishing => {
-      console.log(afterPublishing);
       this.isProviderOpen = false;
       this.hasConfirmedTxn = false;
       this.hasError = afterPublishing.hasError;
       this.txn = afterPublishing.txn;
       this.isTxnComplete = afterPublishing.isTxnComplete;
+
+      this.zone.run(() => console.log('ran'));
     });
   }
 

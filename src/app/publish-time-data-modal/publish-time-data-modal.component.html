@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-6">
-        <div class="modal-body" *ngIf="!hasConfirmedTxn">
+        <div class="modal-body" *ngIf="!hasConfirmedTxn && !hasError && !isTxnComplete">
           <h4>Congratulations!</h4>
           <h5>You are about to publish your logged time to the Ethereum blockchain.</h5>
           <p>After clicking the <em>publish</em> button, a MetaMask window will open asking you to submit the transaction; you must have at least 0.1 ETH to achieve this.</p>
@@ -15,10 +15,16 @@
         <div class="modal-body" *ngIf="hasConfirmedTxn && isProviderOpen">
           <h4>Waiting for confirmation...</h4>
         </div>
+        <div class="modal-body" *ngIf="hasError && !isProviderOpen">
+          <h4>There was an error...</h4>
+        </div>
         <div class="modal-body" *ngIf="!hasError && !isProviderOpen && isTxnComplete">
           <h4>Transaction complete</h4>
           <p>CanTrack link: <a href="{{ ethereumService.cantrackURL }}/{{ txn.code }}" target="_blank">{{ ethereumService.cantrackURL }}/{{ txn.code }}</a></p>
-          <p>TXN hash: <a href="https://etherscan.io/tx/{{ txn.hash }}"></a>{{ txn.hash }}</p>
+          <p>TXN hash: <a href="https://etherscan.io/tx/{{ txn.hash }}" class="d-inline-block text-truncate" style="max-width: 210px; margin-bottom: -9px;">{{ txn.hash }}</a></p>
+          <nav>
+            <button class="btn btn-outline btn-danger">Close</button>
+          </nav>
         </div>
       </div>
     </div>

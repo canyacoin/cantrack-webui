@@ -46,7 +46,7 @@ export class EthereumService {
     previewService.isOn.subscribe(previewServiceIsOn => {
       if (previewServiceIsOn && !this.CanTrackContractInterface) {
         this.getContractInterface().subscribe(data => {
-          console.log(data);
+          // console.log(data);
           this.CanTrackContractInterface = data;
         }, error => console.log(error));
 
@@ -76,13 +76,15 @@ export class EthereumService {
 
     this.CanTrackContract = contract.at(CANTRACK_CONTRACT_ADDRESS);
 
-    console.log(this.CanTrackContract);
+    // console.log(this.CanTrackContract);
   }
 
   onBeforePublish() {
     if (!this.CanTrackContract) {
       this.setContract();
     }
+
+    // TODO recheck that web3 provider is logged in
 
     this.beforePublishing.next({isModalOpen: true});
 

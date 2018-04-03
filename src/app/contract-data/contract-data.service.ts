@@ -8,6 +8,10 @@ export class ContractDataService implements Resolve<any> {
 
   hasContract: Subject<any> = new Subject<any>()
 
+  contractData: Subject<any> = new Subject<any>()
+
+  contractSender: Subject<any> = new Subject<any>()
+
   constructor(
     private router: Router,
     private ethereumService: EthereumService) {
@@ -24,6 +28,7 @@ export class ContractDataService implements Resolve<any> {
           }
 
           console.log(result);
+          this.contractData.next(JSON.parse(result));
         });
 
       ethereumService.CanTrackContract
@@ -34,6 +39,7 @@ export class ContractDataService implements Resolve<any> {
           }
 
           console.log(result);
+          this.contractSender.next(result);
         });
     });
   }
@@ -49,6 +55,9 @@ export class ContractDataService implements Resolve<any> {
 
         this.ethereumService.init(canTrackCode);
       }
+    } else {
+      this.hasContract.next(false);
+      return null;
     }
   }
 

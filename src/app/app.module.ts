@@ -15,13 +15,13 @@ import { TimerService } from './timer.service';
 import { TimerTriggerComponent } from './timer-trigger/timer-trigger.component';
 import { TimelineSwitchComponent } from './timeline-switch/timeline-switch.component';
 import { PreviewService } from './preview.service';
-import { DatesDifferencePipe } from './dates-difference.pipe';
 import { IdleTaskService } from './idle-task.service';
 import { IdleTaskModalComponent } from './idle-task-modal/idle-task-modal.component';
 import { EthereumService } from './ethereum.service';
 import { PublishTimeDataModalComponent } from './publish-time-data-modal/publish-time-data-modal.component';
 import { AppRoutingModule } from './/app-routing.module';
 
+import { CustomPipesModule } from './custom-pipes/custom-pipes.module';
 import { ContractDataModule } from './contract-data/contract-data.module';
 
 
@@ -36,7 +36,6 @@ import { ContractDataModule } from './contract-data/contract-data.module';
     SubTaskComponent,
     TimerTriggerComponent,
     TimelineSwitchComponent,
-    DatesDifferencePipe,
     IdleTaskModalComponent,
     PublishTimeDataModalComponent
   ],
@@ -45,8 +44,10 @@ import { ContractDataModule } from './contract-data/contract-data.module';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    ContractDataModule
+    ContractDataModule,
+    CustomPipesModule
   ],
+  exports: [],
   providers: [
     TimerService,
     PreviewService,

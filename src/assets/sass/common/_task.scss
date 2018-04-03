@@ -1,0 +1,104 @@
+.task {
+  border-top: 7px solid;
+  position: relative;
+  .card-body {
+    padding: 0;
+  }
+  .description {}
+  .time {
+    font-size: $h5-font-size;
+    font-weight: 600;
+    &.time-sm {
+      padding-bottom: get-spacer(1);
+      padding-top: get-spacer(1);
+    }
+  }
+  .timer-trigger-wrapper {
+    text-align: center;
+    .play {}
+    .stop {}
+  }
+  .form-control {
+    &::placeholder {
+      color: $gray-300;
+    }
+    font-size: $h5-font-size;
+    font-weight: 600;
+    border-radius: 0;
+    border: none;
+    resize: none;
+    &:focus {
+      box-shadow: inherit;
+      border: none;
+    }
+  }
+  .remove-task {
+    position: absolute;
+    text-align: right;
+    font-size: 18px;
+    display: none;
+    width: 100%;
+    color: $red;
+    right: -21px;
+    top: -21px;
+  }
+  &:hover {
+    .remove-task {
+      cursor: pointer;
+      display: block;
+    }
+  }
+
+  .preview-mode-wrapper {
+    display: none;
+  }
+
+  &.preview-mode {
+    .card-footer {
+      display: none;
+    }
+    .preview-mode-wrapper {
+      padding: get-spacer(3);
+      display: block;
+      ul {
+        @include list-unstyled;
+        li {
+          > span {
+            margin-right: get-spacer(2);
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+
+  &.task-from-contract {
+    .description {
+      font-size: $h5-font-size;
+      padding: get-spacer(3);
+      font-weight: 600;
+    }
+    .task-time-wrapper {
+      padding: get-spacer(3);
+      display: block;
+      ul {
+        @include list-unstyled;
+        li {
+          > span {
+            margin-right: get-spacer(2);
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+}
+
+.task-row {
+  .actions {
+    width: 56px;
+  }
+  .time {
+    width: 140px;
+  }
+}

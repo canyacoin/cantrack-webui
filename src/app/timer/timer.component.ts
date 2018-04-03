@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TimerService } from '../timer.service';
+import { EthereumService } from '../ethereum.service';
 import * as moment from 'moment';
 
 @Component({
@@ -12,7 +13,9 @@ export class TimerComponent implements OnInit {
 
   today: string
 
-  constructor(public globalTimer: TimerService) {
+  constructor(
+    public globalTimer: TimerService,
+    public ethereumService: EthereumService) {
     this.today = moment().format(this.globalTimer.dateFormat);
   }
 

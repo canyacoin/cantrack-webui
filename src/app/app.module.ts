@@ -19,6 +19,7 @@ import { DatesDifferencePipe } from './dates-difference.pipe';
 import { IdleTaskService } from './idle-task.service';
 import { IdleTaskModalComponent } from './idle-task-modal/idle-task-modal.component';
 import { EthereumService } from './ethereum.service';
+import { PublishTimeDataModalComponent } from './publish-time-data-modal/publish-time-data-modal.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { EthereumService } from './ethereum.service';
     TimerTriggerComponent,
     TimelineSwitchComponent,
     DatesDifferencePipe,
-    IdleTaskModalComponent
+    IdleTaskModalComponent,
+    PublishTimeDataModalComponent
   ],
   imports: [
     BrowserModule,

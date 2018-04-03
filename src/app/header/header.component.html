@@ -10,7 +10,7 @@
     </div>
 
     <div class="topbar-right d-print-none">
-      <button *ngIf="isInPreviewMode" (click)="ethereumService.onPublish()" class="btn btn-sm btn-danger">
+      <button *ngIf="isInPreviewMode" (click)="ethereumService.onBeforePublish()" class="btn btn-sm btn-primary">
         Publish to Ethereum
       </button>
       <button *ngIf="isInPreviewMode" class="btn btn-sm btn-outline btn-primary" (click)="onPrint()">

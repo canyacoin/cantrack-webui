@@ -80,6 +80,7 @@ export class EthereumService {
     if (typeof window.web3 !== 'undefined') {
       this.web3Provider = new window.Web3(window.web3.currentProvider);
       this.ETHAddress = this.web3Provider.eth.accounts[0];
+      console.log(this.web3Provider);
     } else {
       // TODO: handle lack of Web3 provider
     }
@@ -90,7 +91,7 @@ export class EthereumService {
 
     this.CanTrackContract = contract.at(CANTRACK_CONTRACT_ADDRESS);
 
-    // console.log(this.CanTrackContract);
+    console.log(this.CanTrackContract);
   }
 
   onBeforePublish() {

@@ -102,6 +102,8 @@ export class TimerService {
     });
 
     this.task.updateLocalRanges();
+
+    return this;
   }
 
   closeRange() {

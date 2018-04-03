@@ -132,13 +132,12 @@ export class TaskListComponent implements OnInit {
 
     task.save();
 
-    let diff = _task.idleTimeDifference - task.time;
-    task.localTimer.counter.prev += diff;
-    task.localTimer.setTime();
+    task.localTimer.counter.prev += _task.idleTimeDifference;
+    task.localTimer.addRange().onTimerStart();
 
-    this.globalTimer.counter.prev += diff;
+    this.globalTimer.counter.prev += _task.idleTimeDifference;
     this.globalTimer.updateGlobalTimer();
-    this.globalTimer.setTime();
+    this.globalTimer.onTimerStart();
 
     this.updateLocalTaskList();
     task.updateGlobalRanges();

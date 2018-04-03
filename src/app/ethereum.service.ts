@@ -46,7 +46,6 @@ export class EthereumService {
     previewService.isOn.subscribe(previewServiceIsOn => {
       if (previewServiceIsOn && !this.CanTrackContractInterface) {
         this.getContractInterface().subscribe(data => {
-          // console.log(data);
           this.CanTrackContractInterface = data;
         }, error => console.log(error));
 

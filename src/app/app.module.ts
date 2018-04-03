@@ -20,6 +20,7 @@ import { IdleTaskService } from './idle-task.service';
 import { IdleTaskModalComponent } from './idle-task-modal/idle-task-modal.component';
 import { EthereumService } from './ethereum.service';
 import { PublishTimeDataModalComponent } from './publish-time-data-modal/publish-time-data-modal.component';
+import { AppRoutingModule } from './/app-routing.module';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { PublishTimeDataModalComponent } from './publish-time-data-modal/publish
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [
     TimerService,

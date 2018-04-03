@@ -34,7 +34,7 @@ export class EthereumService {
 
   isConfirmedTxn: boolean = false
 
-  cantrackURL: string = 'http://localhost:4200'
+  cantrackURL: string = 'http://localhost:4200/contract'
 
   constructor(
     private globalTimer: TimerService,

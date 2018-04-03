@@ -22,6 +22,8 @@ import { EthereumService } from './ethereum.service';
 import { PublishTimeDataModalComponent } from './publish-time-data-modal/publish-time-data-modal.component';
 import { AppRoutingModule } from './/app-routing.module';
 
+import { ContractDataModule } from './contract-data/contract-data.module';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { AppRoutingModule } from './/app-routing.module';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ContractDataModule
   ],
   providers: [
     TimerService,

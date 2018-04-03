@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
 const CANTRACK_JSON_ID = 'CANTRACK';
-const CANTRACK_CONTRACT_ADDRESS = '0x872d443291bad3ea04bddfed97fdd57cf76a4329';
+const CANTRACK_CONTRACT_ADDRESS = '0xbeeab9bdc78e86acf160f4e6c44ff920bbc3b2db';
 
 declare var window: any;
 
@@ -37,7 +37,7 @@ export class EthereumService {
 
   isConfirmedTxn: boolean = false
 
-  cantrackURL: string = 'http://localhost:4200/contract'
+  cantrackURL: string = 'https://canya-tracker.firebaseapp.com/contract'
 
   constructor(
     private globalTimer: TimerService,

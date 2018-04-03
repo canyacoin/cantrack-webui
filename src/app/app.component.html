@@ -3,9 +3,9 @@
 <app-idle-task-modal></app-idle-task-modal>
 <app-publish-time-data-modal></app-publish-time-data-modal>
 
-<app-contract-data-wrapper></app-contract-data-wrapper>
+<app-contract-data-wrapper *ngIf="isContractViewMode"></app-contract-data-wrapper>
 
-<main class="site-wrapper pb-3" role="main">
+<main class="site-wrapper pb-3" role="main" *ngIf="!isContractViewMode">
   <app-header></app-header>
 
   <div class="container">

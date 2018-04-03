@@ -26,6 +26,9 @@ export class EthereumService {
   contractData: any
 
 
+  onInit: Subject<any> = new Subject<any>()
+
+
   beforePublishing: Subject<any> = new Subject<any>()
 
   onPublishing: Subject<any> = new Subject<any>()
@@ -55,6 +58,18 @@ export class EthereumService {
         this.setWeb3Provider();
       }
     });
+  }
+
+  init(canTrackCode?: string) {
+    this.getContractInterface().subscribe(data => {
+      this.CanTrackContractInterface = data;
+
+      this.setWeb3Provider();
+
+      this.setContract();
+
+      this.onInit.next(canTrackCode);
+    }, error => console.log(error));
   }
 
   getContractInterface(): Observable<any> {

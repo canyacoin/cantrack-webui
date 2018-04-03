@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ContractDataService } from './contract-data/contract-data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +8,19 @@ import { Component, Input } from '@angular/core';
 })
 
 export class AppComponent {
+
   @Input() projectName: string = 'Click to edit this project name'
 
-  constructor() {
+  isContractViewMode: boolean = false
+
+  constructor(private contractDataService: ContractDataService) {
     this.projectName = localStorage.getItem('projectName') ?
                         localStorage.getItem('projectName') :
                         this.projectName;
+
+    contractDataService.hasContract.subscribe(hasContract => {
+      this.isContractViewMode = hasContract;
+    });
   }
 
   onKeyUp(e) {

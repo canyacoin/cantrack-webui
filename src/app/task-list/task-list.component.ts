@@ -128,19 +128,17 @@ export class TaskListComponent implements OnInit {
     let task = this.tasks[_task.id].instance;
 
     let ranges = task.localTimer.counter.ranges;
-    ranges[_task.idleRangeIndex].to = _task.idleTo;
+    ranges[_task.idleRangeIndex] = {from: _task.idleFrom, to: _task.idleTo};
 
     task.save();
+    this.updateLocalTaskList();
+    task.updateGlobalRanges();
 
     task.localTimer.counter.prev += _task.idleTimeDifference;
     task.localTimer.addRange().onTimerStart();
 
     this.globalTimer.counter.prev += _task.idleTimeDifference;
-    this.globalTimer.updateGlobalTimer();
     this.globalTimer.onTimerStart();
-
-    this.updateLocalTaskList();
-    task.updateGlobalRanges();
 
     _task.isIdle = false;
     _task.addTime = false;

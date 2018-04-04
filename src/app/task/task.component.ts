@@ -180,7 +180,7 @@ export class TaskComponent implements OnInit {
     let div = diff / secondsInHour;
     let width = div > 1 ? 100 : (div * 1000);
 
-    let today = moment().format(this.globalTimer.dateFormat);
+    let today = from.format(this.globalTimer.dateFormat);
 
     let hour = this.globalTimer.dates[today][from.format('H')];
 

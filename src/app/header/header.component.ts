@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { PreviewService } from '../preview.service';
 import { EthereumService } from '../ethereum.service';
 
+declare var window: any;
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
+
 export class HeaderComponent implements OnInit {
 
   isInPreviewMode: boolean = false
@@ -41,6 +44,8 @@ export class HeaderComponent implements OnInit {
     document.querySelector('.date-wrapper').classList.add('d-none');
 
     this.isInPreviewMode = true;
+
+    window.jQuery('html, body').animate({scrollTop: 0}, 600);
   }
 
   onExitPreview() {
@@ -62,6 +67,8 @@ export class HeaderComponent implements OnInit {
     document.querySelector('.date-wrapper').classList.remove('d-none');
 
     this.isInPreviewMode = false;
+
+    window.jQuery('html, body').animate({scrollTop: 0}, 600);
   }
 
   setTaskTextareaHeight(textarea, maxRowLength) {

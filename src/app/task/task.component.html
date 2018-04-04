@@ -17,7 +17,14 @@
     </div>
     <div class="preview-mode-wrapper" *ngIf="previewModeIsOn && localTimer.counter.ranges.length > 0">
       <div class="row">
-        <div class="col-4 text-center" [innerHtml]="localTimer.counter.ranges | datesDifference:'as-counter'"></div>
+        <div class="col-4 text-center">
+          <div class="row">
+            <div class="col"><h5>{{ localTimer.counter.days }}</h5><small>Days</small></div>
+            <div class="col"><h5>{{ localTimer.counter.hours }}</h5><small>Hours</small></div>
+            <div class="col"><h5>{{ localTimer.counter.minutes }}</h5><small>Minutes</small></div>
+            <div class="col"><h5>{{ localTimer.counter.seconds }}</h5><small>Seconds</small></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

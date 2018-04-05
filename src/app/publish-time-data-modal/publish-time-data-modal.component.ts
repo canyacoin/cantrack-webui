@@ -28,16 +28,17 @@ export class PublishTimeDataModalComponent implements OnInit {
 
     this.ethereumService.onPublishing.subscribe(onPublishing => {
       this.isProviderOpen = onPublishing.isProviderOpen;
-      this.hasConfirmedTxn = true;
       this.hasError = onPublishing.hasError;
+
+      this.zone.run(() => console.log('ran'));
     });
 
     this.ethereumService.afterPublishing.subscribe(afterPublishing => {
       this.isProviderOpen = false;
-      this.hasConfirmedTxn = false;
       this.hasError = afterPublishing.hasError;
       this.txn = afterPublishing.txn;
       this.isTxnComplete = afterPublishing.isTxnComplete;
+      this.hasConfirmedTxn = afterPublishing.hasConfirmedTxn;
 
       this.zone.run(() => console.log('ran'));
     });
@@ -46,5 +47,13 @@ export class PublishTimeDataModalComponent implements OnInit {
   ngOnInit() {
   }
 
+  close() {
+    this.isPublishing = false;
+    this.isProviderOpen = false;
+    this.hasError = false;
+    this.isTxnComplete = false;
+    this.hasConfirmedTxn = false;
+    this.txn = {};
+  }
 
 }

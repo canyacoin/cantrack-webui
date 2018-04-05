@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
 const CANTRACK_JSON_ID = 'CANTRACK';
-const CANTRACK_CONTRACT_ADDRESS = '0x872d443291bad3ea04bddfed97fdd57cf76a4329';
+const CANTRACK_CONTRACT_ADDRESS = '0x345ca3e014aaf5dca488057592ee47305d9b3e10';
 
 declare var window: any;
 
@@ -120,10 +120,18 @@ export class EthereumService {
       from: this.web3Provider.eth.accounts[0],
       to: CANTRACK_CONTRACT_ADDRESS,
       gas: 6000000,
-      gasPrice: 21
+      gasPrice: 21000000,
     };
 
-    this.CanTrackContract.ShortLink({}).watch((error, result) => {
+    let blockNumber = this.web3Provider.eth.getBlockNumber((error, result) => {
+        if (error) {
+          console.log(error);
+        }
+
+        return result;
+      });
+
+    this.CanTrackContract.ShortLink({}, {fromBlock: blockNumber-1, toBlock: 'latest'}, (error, result) => {
       if (error) {
         console.log(error);
         // TODO: handle event error
@@ -139,7 +147,8 @@ export class EthereumService {
             blockHash: result.blockHash,
           },
           isTxnComplete: true,
-          hasError: false
+          hasError: false,
+          hasConfirmedTxn: true,
         });
       }
 
@@ -154,14 +163,17 @@ export class EthereumService {
       (error, result) => {
         if (error) {
           console.log(error);
-          // TODO: handle txn error
+
           this.onPublishing.next({
             isProviderOpen: false,
             hasError: true,
           });
+
+          return;
         }
 
         this.isConfirmedTxn = true;
+
         this.onPublishing.next({
           isProviderOpen: false,
           hasError: false,

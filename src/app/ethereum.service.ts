@@ -12,7 +12,7 @@ let ethers = require('ethers');
 let contract = require('truffle-contract');
 
 const CANTRACK_JSON_ID = 'CANTRACK';
-const CANTRACK_CONTRACT_ADDRESS = '0x5276bf77cd5befbf6e8a3d4625e01ee8ed889937';
+const CANTRACK_CONTRACT_ADDRESS = '0xBEeaB9BdC78E86acf160f4e6C44ff920bBC3b2dB';
 
 @Injectable()
 export class EthereumService {
@@ -159,15 +159,26 @@ export class EthereumService {
 
     this.onPublishing.next({isProviderOpen: true});
 
-    /*
-      ETHERS JS attempt
-     */
-    console.log(this.contractData);
-    this.CanTrackContract.addData(
-      JSON.stringify(this.contractData),
-      txOptions).then(txn => {
-        console.log(txn);
-        this.isConfirmedTxn = true;
+
+    this.CanTrackContract.addData.estimateGas(
+      `0x${JSON.stringify(this.contractData)}`,
+      txOptions).then(gas => {
+        console.log(gas);
+        txOptions.gas = gas;
+
+        this.CanTrackContract.addData(
+          JSON.stringify(this.contractData),
+          txOptions).then(txn => {
+            console.log(txn);
+            this.isConfirmedTxn = true;
+          }).catch(error => {
+            console.log(error);
+            this.onPublishing.next({
+              isProviderOpen: false,
+              hasError: true,
+            });
+          });
+
       }).catch(error => {
         console.log(error);
         this.onPublishing.next({
@@ -175,6 +186,8 @@ export class EthereumService {
           hasError: true,
         });
       });
+
+    console.log(this.contractData);
   }
 
   filterEmptyGlobalTimerRanges({counter, createdAt, dates}) {

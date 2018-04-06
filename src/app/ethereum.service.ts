@@ -44,6 +44,8 @@ export class EthereumService {
 
   cantrackURL: string = 'https://canya-tracker.firebaseapp.com/contract'
 
+  networkURL: string = 'https://ropsten.etherscan.io'
+
   constructor(
     private globalTimer: TimerService,
     private previewService: PreviewService,

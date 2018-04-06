@@ -33,7 +33,7 @@
           *ngIf="!hasError && !isProviderOpen && isTxnComplete && hasConfirmedTxn">
           <h4>Transaction complete</h4>
           <p>CanTrack link: <a href="{{ ethereumService.cantrackURL }}/{{ txn.code }}" target="_blank">{{ ethereumService.cantrackURL }}/{{ txn.code }}</a></p>
-          <p>TXN hash: <a href="https://etherscan.io/tx/{{ txn.hash }}" class="d-inline-block text-truncate" style="max-width: 210px; margin-bottom: -9px;">{{ txn.hash }}</a></p>
+          <p>TXN hash: <a href="{{ ethereumService.networkURL }}/tx/{{ txn.hash }}" target="_blank" class="d-inline-block text-truncate" style="max-width: 210px; margin-bottom: -9px;">{{ txn.hash }}</a></p>
           <nav>
             <button class="btn btn-outline btn-danger" (click)="close()">Close</button>
           </nav>

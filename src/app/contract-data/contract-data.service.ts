@@ -21,26 +21,16 @@ export class ContractDataService implements Resolve<any> {
       this.hasContract.next(true);
 
       ethereumService.CanTrackContract
-        .getData(canTrackCode, (error, result) => {
-          if (error) {
-            console.log(error);
-            // TODO handle error
-          }
-
-          console.log(result);
-          this.contractData.next(JSON.parse(result));
-        });
+        .getData(canTrackCode).then(res => {
+          console.log(res);
+          this.contractData.next(JSON.parse(res));
+        }).catch(error => console.log(error));
 
       ethereumService.CanTrackContract
-        .getSender(canTrackCode, (error, result) => {
-          if (error) {
-            console.log(error);
-            // TODO handle error
-          }
-
-          console.log(result);
-          this.contractSender.next(result);
-        });
+        .getSender(canTrackCode).then(res => {
+          console.log(res);
+          this.contractSender.next(res);
+        }).catch(error => console.log(error));
     });
   }
 
@@ -50,7 +40,7 @@ export class ContractDataService implements Resolve<any> {
     console.log(canTrackCode);
     if (canTrackCode) {
       if (!this.ethereumService.CanTrackContractInterface ||
-          !this.ethereumService.web3Provider ||
+          !this.ethereumService.web3 ||
           !this.ethereumService.CanTrackContract) {
 
         this.ethereumService.init(canTrackCode);

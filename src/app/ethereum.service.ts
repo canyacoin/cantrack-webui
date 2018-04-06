@@ -4,10 +4,15 @@ import { TimerService } from './timer.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
-const CANTRACK_JSON_ID = 'CANTRACK';
-const CANTRACK_CONTRACT_ADDRESS = '0x345ca3e014aaf5dca488057592ee47305d9b3e10';
-
+declare let require: any;
 declare var window: any;
+
+let Web3 = require('web3');
+let ethers = require('ethers');
+let contract = require('truffle-contract');
+
+const CANTRACK_JSON_ID = 'CANTRACK';
+const CANTRACK_CONTRACT_ADDRESS = '0x5276bf77cd5befbf6e8a3d4625e01ee8ed889937';
 
 @Injectable()
 export class EthereumService {
@@ -16,7 +21,7 @@ export class EthereumService {
 
   CanTrackContract: any
 
-  web3Provider: any
+  web3: any
 
 
   ETHAddress: string
@@ -54,7 +59,7 @@ export class EthereumService {
 
       }
 
-      if (previewServiceIsOn && !this.web3Provider) {
+      if (previewServiceIsOn && !this.web3) {
         this.setWeb3Provider();
       }
     });
@@ -66,9 +71,9 @@ export class EthereumService {
 
       this.setWeb3Provider();
 
-      this.setContract();
-
-      this.onInit.next(canTrackCode);
+      this.setContract().then(() => {
+        this.onInit.next(canTrackCode);
+      });
     }, error => console.log(error));
   }
 
@@ -77,21 +82,22 @@ export class EthereumService {
   }
 
   setWeb3Provider() {
-    if (typeof window.web3 !== 'undefined') {
-      this.web3Provider = new window.Web3(window.web3.currentProvider);
-      this.ETHAddress = this.web3Provider.eth.accounts[0];
-      console.log(this.web3Provider);
-    } else {
-      // TODO: handle lack of Web3 provider
-    }
+    this.web3 = new Web3(Web3.givenProvider);
+    console.log(this.web3);
+    this.web3.eth.getAccounts().then(accounts => {
+      console.log(accounts);
+      this.ETHAddress = accounts[0];
+    });
   }
 
   setContract() {
-    let contract = this.web3Provider.eth.contract(this.CanTrackContractInterface.abi);
+    let c = contract({abi: this.CanTrackContractInterface.abi});
 
-    this.CanTrackContract = contract.at(CANTRACK_CONTRACT_ADDRESS);
-
-    console.log(this.CanTrackContract);
+    c.setProvider(this.web3.currentProvider);
+    return c.at(CANTRACK_CONTRACT_ADDRESS).then(instance => {
+      console.log(instance);
+      this.CanTrackContract = instance;
+    }).catch(error => console.log(error));
   }
 
   onBeforePublish() {
@@ -117,23 +123,16 @@ export class EthereumService {
 
   onPublish() {
     let txOptions = {
-      from: this.web3Provider.eth.accounts[0],
+      from: this.ETHAddress,
       to: CANTRACK_CONTRACT_ADDRESS,
       gas: 6000000,
-      gasPrice: 21000000,
+      gasPrice: 21000000000,
     };
 
-    let blockNumber = this.web3Provider.eth.getBlockNumber((error, result) => {
-        if (error) {
-          console.log(error);
-        }
-
-        return result;
-      });
-
-    this.CanTrackContract.ShortLink({}, {fromBlock: blockNumber-1, toBlock: 'latest'}, (error, result) => {
+    let onShortLink = (error, result) => {
       if (error) {
         console.log(error);
+        return;
         // TODO: handle event error
       }
 
@@ -146,6 +145,7 @@ export class EthereumService {
             blockNumber: result.blockNumber,
             blockHash: result.blockHash,
           },
+          isProviderOpen: false,
           isTxnComplete: true,
           hasError: false,
           hasConfirmedTxn: true,
@@ -153,34 +153,28 @@ export class EthereumService {
       }
 
       console.log(result);
-    });
+    };
+
+    this.CanTrackContract.ShortLink().watch(onShortLink);
 
     this.onPublishing.next({isProviderOpen: true});
 
+    /*
+      ETHERS JS attempt
+     */
+    console.log(this.contractData);
     this.CanTrackContract.addData(
       JSON.stringify(this.contractData),
-      txOptions,
-      (error, result) => {
-        if (error) {
-          console.log(error);
-
-          this.onPublishing.next({
-            isProviderOpen: false,
-            hasError: true,
-          });
-
-          return;
-        }
-
+      txOptions).then(txn => {
+        console.log(txn);
         this.isConfirmedTxn = true;
-
+      }).catch(error => {
+        console.log(error);
         this.onPublishing.next({
           isProviderOpen: false,
-          hasError: false,
+          hasError: true,
         });
-
-        console.log(result);
-    });
+      });
   }
 
   filterEmptyGlobalTimerRanges({counter, createdAt, dates}) {

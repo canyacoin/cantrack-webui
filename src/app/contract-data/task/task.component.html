@@ -4,14 +4,9 @@
       {{ description }}
     </div>
     <div class="task-time-wrapper">
-      <h6><strong>Total: {{ ranges | datesDifference:'sum' }}</strong></h6>
-      <ul>
-        <li *ngFor="let range of ranges">
-          <span><strong>{{ [range.from, range.to] | datesDifference }}</strong>, </span>
-          <span><strong>from: </strong>{{ range.from | date:'medium' }}, </span>
-          <span><strong>to: </strong> {{ range.to | date:'medium' }}</span>
-        </li>
-      </ul>
+      <div class="row">
+        <div class="col-4" [innerHtml]="ranges | datesDifference:'as-counter'"></div>
+      </div>
     </div>
   </div>
 </article>

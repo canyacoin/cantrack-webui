@@ -78,8 +78,12 @@
       padding: get-spacer(3);
       font-weight: 600;
     }
+    .total-time {
+      margin-bottom: get-spacer(4);
+    }
     .task-time-wrapper {
       padding: get-spacer(3);
+      padding-bottom: 0;
       display: block;
       ul {
         @include list-unstyled;
@@ -88,6 +92,16 @@
             margin-right: get-spacer(2);
             display: inline-block;
           }
+        }
+      }
+    }
+    .range {
+      background-color: $gray-100;
+      padding: get-spacer(2) 0;
+      .col {
+        h5 {
+          font-size: $font-size-base;
+          margin-bottom: 0;
         }
       }
     }

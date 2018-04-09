@@ -17,9 +17,11 @@ import { TaskComponent } from '../task/task.component';
 
 export class ContractDataWrapperComponent implements OnInit {
 
-  @ViewChild("taskList", { read: ViewContainerRef }) container
+  @ViewChild("taskList", { read: ViewContainerRef }) tasksContainer
 
   taskRef: ComponentRef<any>
+
+  globalCounter: any
 
   constructor(
     private resolver: ComponentFactoryResolver,
@@ -27,6 +29,7 @@ export class ContractDataWrapperComponent implements OnInit {
 
     contractDataService.contractData.subscribe(data => {
       console.log(data);
+      this.globalCounter = this.renderGlobalTime(data.globalTimer.counter);
       Object.keys(data.taskList)
         .forEach(key => this.loadTask(data.taskList[key]));
     });
@@ -41,10 +44,17 @@ export class ContractDataWrapperComponent implements OnInit {
 
   }
 
+  renderGlobalTime(counter) {
+    return `<div class="col"><h5>${ counter.days }</h5><small>Days</small></div>
+              <div class="col"><h5>${ counter.hours }</h5><small>Hours</small></div>
+              <div class="col"><h5>${ counter.minutes }</h5><small>Minutes</small></div>
+              <div class="col"><h5>${ counter.seconds }</h5><small>Seconds</small></div>`;
+  }
+
   loadTask(task: any) {
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(TaskComponent);
 
-    this.taskRef = this.container.createComponent(factory);
+    this.taskRef = this.tasksContainer.createComponent(factory);
 
     this.taskRef.location.nativeElement.classList.add('col-12');
 

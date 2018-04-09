@@ -2,6 +2,20 @@
 
 <main class="site-wrapper pb-3" role="main">
   <div class="container">
+
+    <section class="time-tracker-wrapper">
+      <header class="global-time">
+        <div class="timeline-wrapper">
+          <div class="counter">
+            <div class="countdown countdown-sm">
+              <div class="row" [innerHtml]="globalCounter"></div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </section>
+
+
     <div class="row">
       <template #taskList></template>
     </div>

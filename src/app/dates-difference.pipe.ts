@@ -35,7 +35,7 @@ export class DatesDifferencePipe implements PipeTransform {
       counter.seconds = Math.floor((distance % (minute)) / second);
 
       let template = `
-        <div class="row">
+        <div class="row text-center">
           <div class="col"><h5>${ counter.days }</h5><small>Days</small></div>
           <div class="col"><h5>${ counter.hours }</h5><small>Hours</small></div>
           <div class="col"><h5>${ counter.minutes }</h5><small>Minutes</small></div>

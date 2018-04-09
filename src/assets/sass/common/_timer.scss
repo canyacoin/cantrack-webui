@@ -1,0 +1,115 @@
+.global-time {
+  @include flex-column-center;
+  @include make-container;
+  > nav {
+    @include make-container;
+    padding-top: get-spacer(2);
+    padding-bottom: get-spacer(2);
+  }
+
+  .counter, .actions {
+    @include flex-column-center;
+    min-height: 180px;
+  }
+  .countdown-sm {
+    h5 {
+      font-size: $h5-font-size;
+    }
+  }
+
+  .counter {
+    .title {
+      margin-bottom: get-spacer(5);
+    }
+  }
+
+  .actions {
+
+  }
+
+  .timeline-wrapper {
+    @include flex-column-center;
+    min-height: 140px;
+  }
+
+  .timeline {
+    @include flex-row-space-between;
+    @include list-unstyled;
+    background-color: $gray-100;
+    position: relative;
+    height: 56px;
+    width: 100%;
+    &:before,
+    &:after {
+      position: absolute;
+      content: '12am';
+      color: $gray-300;
+      z-index: 1;
+      top: 3px;
+    }
+    &:before {
+      left: 7px;
+    }
+    &:after {
+      right: 7px;
+    }
+    li {
+      border-right: 1px solid white;
+      background-color: $gray-100;
+      position: relative;
+      flex-grow: 1;
+      height: 56px;
+      z-index: 10;
+      &:hover {
+        @include box-shadow-default;
+        flex-grow: 11;
+      }
+      > span {
+        font-size: $font-size-sm - 0.2;
+        position: absolute;
+        top: -21px;
+        left: 0;
+      }
+      .ranges {
+        @include flex-row;
+        height: 100%;
+      }
+      .range {
+        transition: all 0.2s ease-in-out;
+        background-color: $yellow;
+        position: relative;
+        // flex-basis: 100%;
+        height: 100%;
+        &:hover {
+          transform: translateY(-7px);
+          cursor: pointer;
+          &:before {
+            border-radius: $border-radius-sm;
+            background-color: $black;
+            content: attr(data-diff);
+            position: absolute;
+            text-align: center;
+            min-width: 56px;
+            font-size: 9px;
+            display: block;
+            color: white;
+            top: -14px;
+            left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .date-wrapper {
+    .date {
+      font-size: $h2-font-size;
+    }
+    .prev,
+    .next {
+      font-size: $h3-font-size;
+      color: $gray-400;
+      padding: 0 get-spacer(2);
+    }
+  }
+}

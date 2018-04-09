@@ -4,8 +4,13 @@
       {{ description }}
     </div>
     <div class="task-time-wrapper">
-      <div class="row">
+      <div class="row total-time align-items-center">
         <div class="col-4" [innerHtml]="ranges | datesDifference:'as-counter'"></div>
+        <div class="col-8"><h5>TOTAL</h5></div>
+      </div>
+      <div class="row range align-items-center" *ngFor="let range of ranges">
+        <div class="col-4" [innerHtml]="[range] | datesDifference:'as-counter'"></div>
+        <div class="col-8"><h6>on {{ range.from | date:'medium' }}</h6></div>
       </div>
     </div>
   </div>

@@ -12,7 +12,6 @@ let ethers = require('ethers');
 let contract = require('truffle-contract');
 
 const CANTRACK_JSON_ID = 'CANTRACK';
-const CANTRACK_CONTRACT_ADDRESS = '0xBEeaB9BdC78E86acf160f4e6C44ff920bBC3b2dB';
 
 @Injectable()
 export class EthereumService {
@@ -26,7 +25,7 @@ export class EthereumService {
 
   ETHAddress: string
 
-  contractAddress: string
+  contractAddress: string = '0xBEeaB9BdC78E86acf160f4e6C44ff920bBC3b2dB'
 
   contractData: any
 
@@ -50,8 +49,6 @@ export class EthereumService {
     private globalTimer: TimerService,
     private previewService: PreviewService,
     private http: HttpClient) {
-
-    this.contractAddress = CANTRACK_CONTRACT_ADDRESS;
 
     previewService.isOn.subscribe(previewServiceIsOn => {
       if (previewServiceIsOn && !this.CanTrackContractInterface) {
@@ -96,7 +93,7 @@ export class EthereumService {
     let c = contract({abi: this.CanTrackContractInterface.abi});
 
     c.setProvider(this.web3.currentProvider);
-    return c.at(CANTRACK_CONTRACT_ADDRESS).then(instance => {
+    return c.at(this.contractAddress).then(instance => {
       console.log(instance);
       this.CanTrackContract = instance;
     }).catch(error => console.log(error));
@@ -126,7 +123,7 @@ export class EthereumService {
   onPublish() {
     let txOptions = {
       from: this.ETHAddress,
-      to: CANTRACK_CONTRACT_ADDRESS,
+      to: this.contractAddress,
       gas: 6000000,
       gasPrice: 21000000000,
     };

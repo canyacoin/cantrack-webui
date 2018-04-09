@@ -3,6 +3,17 @@
 <main class="site-wrapper pb-3" role="main">
   <div class="container">
 
+    <div class="row mb-3">
+      <div class="col-6">
+        <p class="m-0">Contract at address:</p>
+        <a href="{{ ethereumService.networkURL }}/address/{{ ethereumService.contractAddress }}" target="_blank">{{ ethereumService.contractAddress }}</a>
+      </div>
+      <div class="col-6">
+        <p class="m-0">Signer at address:</p>
+        <a href="{{ ethereumService.networkURL }}/address/{{ contractSender }}" target="_blank">{{ contractSender }}</a>
+      </div>
+    </div>
+
     <section class="time-tracker-wrapper">
       <header class="global-time">
         <div class="timeline-wrapper">

@@ -7,6 +7,7 @@ import { Component,
          ViewContainerRef,
          NgZone } from '@angular/core';
 import { ContractDataService } from '../contract-data.service';
+import { EthereumService } from '../../ethereum.service';
 import { TaskComponent } from '../task/task.component';
 
 @Component({
@@ -23,9 +24,12 @@ export class ContractDataWrapperComponent implements OnInit {
 
   globalCounter: any
 
+  contractSender: string
+
   constructor(
     private resolver: ComponentFactoryResolver,
-    private contractDataService: ContractDataService) {
+    private contractDataService: ContractDataService,
+    public ethereumService: EthereumService) {
 
     contractDataService.contractData.subscribe(data => {
       console.log(data);
@@ -36,6 +40,7 @@ export class ContractDataWrapperComponent implements OnInit {
 
     contractDataService.contractSender.subscribe(address => {
       console.log(address);
+      this.contractSender = address;
     });
 
   }

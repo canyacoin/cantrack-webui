@@ -8,6 +8,7 @@
 @import "./node_modules/bootstrap/scss/bootstrap-grid";
 @import "./node_modules/bootstrap/scss/utilities";
 @import "./node_modules/bootstrap/scss/card";
+@import "./node_modules/bootstrap/scss/nav";
 
 @import "./src/assets/sass/fontawesome/fontawesome";
 @import "./src/assets/sass/fontawesome/fa-brands";
@@ -24,15 +25,21 @@
 @import "./src/assets/sass/theme/uikit/scroll";
 @import "./src/assets/sass/theme/uikit/nav";
 @import "./src/assets/sass/theme/layout/topbar";
-// @import "./src/assets/sass/theme/uikit/nav";
+@import "./src/assets/sass/theme/uikit/nav";
 // @import "./src/assets/sass/theme/form/input";
 // @import "./src/assets/sass/theme/form/control";
 
 @import "./src/assets/sass/common/task";
 @import "./src/assets/sass/common/timer";
+@import "./src/assets/sass/common/card";
 
 body {
+  background-color: $gray-100;
   position: relative;
+}
+
+#bancor-wc {
+  background-color: white;
 }
 
 .site-wrapper {

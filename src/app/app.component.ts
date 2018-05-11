@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ContractDataService } from './contract-data/contract-data.service';
 
+declare var BancorConvertWidget: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -25,5 +27,15 @@ export class AppComponent {
 
   onKeyUp(e) {
     localStorage.setItem('projectName', e.target.value);
+  }
+
+  ngAfterViewInit() {
+    BancorConvertWidget.init({
+      'type': '1',
+      'baseCurrencyId': '5a6f61ece3de16000123763a',
+      'pairCurrencyId': '5937d635231e97001f744267',
+      'primaryColor': '#00BFFF',
+      'primaryColorHover': '55DAFB'
+    });
   }
 }

@@ -11,6 +11,7 @@ import { TimerComponent } from './timer/timer.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskComponent } from './task/task.component';
 import { SubTaskComponent } from './sub-task/sub-task.component';
+import { CardsComponent } from './cards/cards.component';
 import { TimerService } from './timer.service';
 import { TimerTriggerComponent } from './timer-trigger/timer-trigger.component';
 import { TimelineSwitchComponent } from './timeline-switch/timeline-switch.component';
@@ -37,7 +38,8 @@ import { ContractDataModule } from './contract-data/contract-data.module';
     TimerTriggerComponent,
     TimelineSwitchComponent,
     IdleTaskModalComponent,
-    PublishTimeDataModalComponent
+    PublishTimeDataModalComponent,
+    CardsComponent
   ],
   imports: [
     BrowserModule,

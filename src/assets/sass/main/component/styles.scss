@@ -197,3 +197,16 @@ body {
 .site-footer {
   background-color: white;
 }
+
+.global-time {
+  .reset {
+    padding: get-spacer(1) 0;
+    font-size: $font-size-sm;
+    text-transform: uppercase;
+    color: $gray-500;
+    &:hover {
+      cursor: pointer;
+      color: $red;
+    }
+  }
+}

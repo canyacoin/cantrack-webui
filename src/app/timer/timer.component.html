@@ -1,7 +1,8 @@
 <header class="global-time">
+  <span class="reset text-right" (click)="globalTimer.reset()"><i class="fa fa-sync"></i> Reset tasks and time</span>
   <div class="timeline-wrapper">
     <div class="counter d-print-block d-none">
-      <div class="countdown countdown-sm" data-countdown="2018/08/19">
+      <div class="countdown countdown-sm">
         <div class="row">
           <div class="col"><h5>{{ globalTimer.counter.days }}</h5><small>Days</small></div>
           <div class="col"><h5>{{ globalTimer.counter.hours }}</h5><small>Hours</small></div>

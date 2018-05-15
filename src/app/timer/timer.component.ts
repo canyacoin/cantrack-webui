@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { TimerService } from '../timer.service';
 import { EthereumService } from '../ethereum.service';
 import * as moment from 'moment';
@@ -15,11 +15,18 @@ export class TimerComponent implements OnInit {
 
   constructor(
     public globalTimer: TimerService,
-    public ethereumService: EthereumService) {
-    this.today = moment().format(this.globalTimer.dateFormat);
+    public ethereumService: EthereumService,
+    private zone: NgZone) {
+
+    globalTimer.onReset.subscribe(data => {
+      this.ngOnInit();
+      zone.run(() => console.log('updated timer'));
+    });
   }
 
   ngOnInit() {
+    this.today = moment().format(this.globalTimer.dateFormat);
+
     if (this.globalTimer.dates[this.today]) {
       this.globalTimer.today = this.globalTimer.dates[this.today];
     } else {
@@ -41,5 +48,4 @@ export class TimerComponent implements OnInit {
       });
     }
   }
-
 }

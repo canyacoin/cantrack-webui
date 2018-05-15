@@ -1,5 +1,6 @@
 import { Injectable, Optional } from '@angular/core';
 import * as moment from 'moment';
+import { Subject } from 'rxjs';
 
 const second = 1000,
       minute = second * 60,
@@ -40,10 +41,35 @@ export class TimerService {
 
   dateFormat: string = 'Y-M-D'
 
+  onReset: Subject<any> = new Subject<any>()
+
   constructor(@Optional() isLocalTimer: boolean = false) {
     if (!isLocalTimer) {
       this.setLocalGlobalTimer();
     }
+  }
+
+  reset(){
+    localStorage.setItem(this.localStorageName, null);
+
+    this.counter = {
+      isOn: false,
+      isLocalTimer: false,
+      prev: 0,
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      ranges: []
+    }
+
+    this.dates = {}
+
+    this.today = [];
+
+    this.setLocalGlobalTimer();
+
+    this.onReset.next({});
   }
 
   setLocalGlobalTimer() {

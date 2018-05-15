@@ -39,12 +39,19 @@ export class TaskListComponent implements OnInit {
     private idleTaskService: IdleTaskService,
     public globalTimer: TimerService) {
 
-    this.localTaskList = localStorage.getItem(this.localTaskListName) ? JSON.parse(localStorage.getItem(this.localTaskListName)) : null;
+    globalTimer.onReset.subscribe(data => {
+      localStorage.setItem(this.localTaskListName, null);
 
-    if (!this.localTaskList) {
-      localStorage.setItem(this.localTaskListName, JSON.stringify({tasks: {}}));
-      this.updateLocalTaskList();
-    }
+      _.each(this.tasks, task => {
+        task.destroy();
+      });
+
+      this.tasks = {};
+
+      this.prevTaskIndex = 0;
+
+      this.ngOnInit();
+    });
 
     idleTaskService.isIdle.subscribe((idleTask: any) => {
       if (idleTask.addTime) {
@@ -58,6 +65,14 @@ export class TaskListComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.localTaskList = localStorage.getItem(this.localTaskListName) ? JSON.parse(localStorage.getItem(this.localTaskListName)) : null;
+
+    if (!this.localTaskList) {
+      localStorage.setItem(this.localTaskListName, JSON.stringify({tasks: {}}));
+      this.updateLocalTaskList();
+    }
+
     this.loadLocalTasks();
     this.checkForIdleTasks();
   }

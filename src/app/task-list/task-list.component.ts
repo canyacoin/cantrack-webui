@@ -29,12 +29,7 @@ export class TaskListComponent implements OnInit {
   localTaskListName: string = 'taskList'
 
   defaultTasks: Array<string> = [
-    'Send contract to the client',
-    'Ask for company assets',
-    'Setup a tribe for the project',
-    'Set project milestones',
-    'Create GIT repo',
-    'Another task...',
+    'What\'s your first task?',
   ];
 
   taskIsIdle: boolean = false

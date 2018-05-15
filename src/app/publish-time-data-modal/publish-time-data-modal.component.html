@@ -16,6 +16,8 @@
         <div class="modal-body"
           *ngIf="!hasError && isProviderOpen">
           <h4>Waiting for confirmation...</h4>
+          <p>A MetaMask dialog should open asking you to submit the transaction. If you closed the dialog without submitting the transaction you may open your MetaMask extension and submit the pending transaction, or you can <u (click)="close()">close this window</u>.</p>
+          <p>Transaction confirmations may take several minutes depending on the Ethereum network response speed.</p>
         </div>
         <div class="modal-body"
           *ngIf="hasError && !isProviderOpen">

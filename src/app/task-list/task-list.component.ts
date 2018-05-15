@@ -177,14 +177,16 @@ export class TaskListComponent implements OnInit {
   }
 
   removeTask(id: number) {
+    this.globalTimer.onTimerStop();
     this.globalTimer.stopLocalTimers();
-    this.tasks[id].instance.localTimer.onTimerStop();
 
     this.clearTaskTime(id);
 
+    let tasks = JSON.parse(localStorage.getItem(this.localTaskListName)).tasks;
+
     this.tasks[id].destroy();
-    delete this.localTaskList.tasks[id];
-    localStorage.setItem(this.localTaskListName, JSON.stringify({tasks: this.localTaskList.tasks}));
+    delete tasks[id];
+    localStorage.setItem(this.localTaskListName, JSON.stringify({tasks: tasks}));
     this.updateLocalTaskList();
   }
 

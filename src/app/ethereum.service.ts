@@ -41,7 +41,7 @@ export class EthereumService {
 
   isConfirmedTxn: boolean = false
 
-  cantrackURL: string = 'https://canya-tracker.firebaseapp.com/contract'
+  cantrackURL: string = 'https://can-track.firebaseapp.com'
 
   networkURL: string = 'https://ropsten.etherscan.io'
 

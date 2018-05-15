@@ -4,6 +4,10 @@ import { TimerService } from '../timer.service';
 import { IdleTaskService } from '../idle-task.service';
 import * as moment from 'moment';
 
+declare var require: any;
+
+const _ = require('lodash');
+
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
@@ -178,10 +182,34 @@ export class TaskListComponent implements OnInit {
   }
 
   removeTask(id: number) {
+    this.globalTimer.stopLocalTimers();
+    this.tasks[id].instance.localTimer.onTimerStop();
+
+    this.clearTaskTime(id);
+
     this.tasks[id].destroy();
     delete this.localTaskList.tasks[id];
     localStorage.setItem(this.localTaskListName, JSON.stringify({tasks: this.localTaskList.tasks}));
     this.updateLocalTaskList();
+  }
+
+  clearTaskTime(id: number){
+    let taskList = JSON.parse(localStorage.getItem(this.localTaskListName)).tasks;
+    let task = taskList[id];
+
+    this.globalTimer.counter.prev -= task.time;
+
+    _.each(this.globalTimer.dates, (hours) => {
+      _.each(hours, hour => {
+        if (hour.ranges.length > 0) {
+          _.remove(hour.ranges, range => {
+            return range.taskId == id;
+          });
+        }
+      });
+    });
+
+    this.globalTimer.updateGlobalTimer();
   }
 }
 

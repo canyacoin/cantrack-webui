@@ -21,14 +21,11 @@
           <a class="nav-link" href="https://t.me/canyacoin" target="_blank">Telegram <i aria-hidden="true" class="fab fa-telegram"></i></a>
         </li>
       </ul>
-      <button *ngIf="isInPreviewMode" (click)="ethereumService.onBeforePublish()" class="btn btn-sm btn-primary">
-        Publish to Ethereum
-      </button>
       <button *ngIf="isInPreviewMode" class="btn btn-sm btn-outline btn-primary" (click)="onPrint()">
         Save as PDF
       </button>
       <button *ngIf="!isInPreviewMode" class="btn btn-sm btn-outline btn-primary" (click)="onPreview()">
-        Preview &amp; Publish
+        Preview &amp; Save to PDF
       </button>
       <button *ngIf="isInPreviewMode" class="btn btn-sm btn-outline btn-primary" (click)="onExitPreview()">
         Exit preview mode

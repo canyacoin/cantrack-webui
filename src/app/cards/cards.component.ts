@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-declare var createCards: any;
+
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
@@ -10,7 +10,6 @@ export class CardsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-       createCards('CanTrack');
   }
 
 }

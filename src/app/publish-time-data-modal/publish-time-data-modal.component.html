@@ -6,7 +6,7 @@
           *ngIf="!hasError && !isTxnComplete && !isProviderOpen && !hasConfirmedTxn">
           <h4>Congratulations!</h4>
           <h5>You are about to publish your logged time to the Ethereum blockchain.</h5>
-          <p>After clicking the <em>publish</em> button, a MetaMask window will open asking you to submit the transaction; you must have at least 0.001 ETH to achieve this.</p>
+          <p>After clicking the <em>publish</em> button, a MetaMask window will open asking you to submit the transaction; you must have at least 0.1 ETH to achieve this.</p>
           <p>After the transaction has been successfully completed, we will provide you with an immutable code in order to retrieve your logged time stored in this contract:<br><a href="https://etherscan.io/address/{{ ethereumService.contractAddress }}">CanTrack contract {{ ethereumService.contractAddress }}</a> </p>
           <nav>
             <button class="btn btn-primary" (click)="ethereumService.onPublish()">publish</button>

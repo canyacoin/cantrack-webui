@@ -32,6 +32,8 @@ export class TaskListComponent implements OnInit {
     '',
   ];
 
+  taskColorIndex: number = 0
+
   taskIsIdle: boolean = false
 
   constructor(

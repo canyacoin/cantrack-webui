@@ -26,7 +26,7 @@ export class TaskComponent implements OnInit {
 
   maxRowLength: number = 17
 
-  taskColors = ['#00FFCC', '#33ccff', '#15EDD8', '#4EDCCA', '#FF6666', '#0078BF', '#FFC600', '#F9A4D8', '#485F64'];
+  taskColors = ['#00aca0', '#33ccff', '#15EDD8', '#FF6666', '#0078BF', '#FFC600', '#F9A4D8'];
 
   taskColor: string
 
@@ -71,7 +71,9 @@ export class TaskComponent implements OnInit {
     let tasks = JSON.parse(localStorage.getItem(this.taskList.localTaskListName)).tasks;
     this.taskColor = tasks[this.id] && tasks[this.id].color ?
                     tasks[this.id].color :
-                    this.taskColors[Math.floor(Math.random() * this.taskColors.length-1) + 1];
+                    this.taskColors[this.taskList.taskColorIndex];
+
+    this.taskList.taskColorIndex = (this.taskList.taskColorIndex === this.taskColors.length) ? 0 : this.taskList.taskColorIndex + 1;
   }
 
   setCurrentTime() {

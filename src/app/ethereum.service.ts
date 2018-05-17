@@ -25,7 +25,7 @@ export class EthereumService {
 
   ETHAddress: string
 
-  contractAddress: string = '0xa104c23dc7ea588d733dcacdb7d931c462fceeb2'
+  contractAddress: string = '0xBEeaB9BdC78E86acf160f4e6C44ff920bBC3b2dB'
 
   contractData: any
 
@@ -41,9 +41,9 @@ export class EthereumService {
 
   isConfirmedTxn: boolean = false
 
-  cantrackURL: string = 'https://cantrack.io'
+  cantrackURL: string = 'https://can-track.firebaseapp.com'
 
-  networkURL: string = 'https://etherscan.io'
+  networkURL: string = 'https://ropsten.etherscan.io'
 
   constructor(
     private globalTimer: TimerService,

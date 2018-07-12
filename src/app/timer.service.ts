@@ -43,11 +43,7 @@ export class TimerService {
 
   onReset: Subject<any> = new Subject<any>()
 
-  constructor(@Optional() isLocalTimer: boolean = false) {
-    if (!isLocalTimer) {
-      this.setLocalGlobalTimer();
-    }
-  }
+  constructor() {}
 
   reset(){
     localStorage.setItem(this.localStorageName, null);

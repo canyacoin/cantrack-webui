@@ -10,7 +10,6 @@ import { FooterComponent } from './footer/footer.component';
 import { TimerComponent } from './timer/timer.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskComponent } from './task/task.component';
-import { SubTaskComponent } from './sub-task/sub-task.component';
 import { CardsComponent } from './cards/cards.component';
 import { TimerService } from './timer.service';
 import { TimerTriggerComponent } from './timer-trigger/timer-trigger.component';
@@ -36,7 +35,6 @@ import { CommonLibModule } from '@canyaio/common-lib';
     TimerComponent,
     TaskListComponent,
     TaskComponent,
-    SubTaskComponent,
     TimerTriggerComponent,
     TimelineSwitchComponent,
     IdleTaskModalComponent,
@@ -60,6 +58,6 @@ import { CommonLibModule } from '@canyaio/common-lib';
     EthereumService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [TaskComponent, SubTaskComponent]
+  entryComponents: [TaskComponent]
 })
 export class AppModule { }

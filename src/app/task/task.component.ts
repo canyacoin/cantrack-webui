@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ComponentFactory, ComponentRef, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { TimerService } from '../timer.service';
 import { PreviewService } from '../preview.service';
-import { SubTaskComponent } from '../sub-task/sub-task.component';
 import * as moment from 'moment';
 
 @Component({
@@ -37,7 +36,8 @@ export class TaskComponent implements OnInit {
     private resolver: ComponentFactoryResolver,
     public previewService: PreviewService) {
 
-    this.localTimer = new TimerService(true);
+    this.localTimer = new TimerService();
+    this.localTimer.setLocalGlobalTimer()
     this.localTimer.counter.isLocalTimer = true;
     this.localTimer.task = this;
     this.globalTimer.addLocalTimer(this.localTimer);

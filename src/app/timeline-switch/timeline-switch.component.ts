@@ -24,6 +24,8 @@ export class TimelineSwitchComponent implements OnInit {
     this.previousDate = this.previousDate || moment().format(this.globalTimer.dateFormat);
 
     this.onChange();
+
+    this.setDateString(this.getPreviousDateObject())
   }
 
   private getDateObject(date: string) {
@@ -72,7 +74,7 @@ export class TimelineSwitchComponent implements OnInit {
   setDateString(date) {
     let today = moment().format(this.globalTimer.dateFormat);
 
-    this.date = today === date.format(this.globalTimer.dateFormat) ? 'Today' : date.format('MMM Do YYYY');
+    this.date = date.format('MMM Do YYYY')
   }
 
 }

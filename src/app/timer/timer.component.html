@@ -1,5 +1,12 @@
 <header class="global-time">
-  <span class="reset text-right" (click)="globalTimer.reset()"><i class="fa fa-sync"></i> {{ 'reset-tasks-and-time' | translate }}</span>
+  <div class="row">
+    <div class="col-sm-6 pt-3">
+      <app-timeline-switch class="d-print-none"></app-timeline-switch>
+    </div>
+    <div class="col-sm-6 pt-3 text-right">
+      <span class="reset" (click)="globalTimer.reset()"><i class="fa fa-sync"></i> {{ 'reset-tasks-and-time' | translate }}</span>
+    </div>
+  </div>
   <div class="timeline-wrapper">
     <div class="counter d-print-block d-none">
       <div class="countdown countdown-sm">

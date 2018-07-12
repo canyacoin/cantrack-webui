@@ -1,9 +1,9 @@
 @import "./src/assets/sass/canya-time-tracker";
 
 .date-wrapper {
-  margin-left: $navbar-padding-x;
   border-radius: $border-radius;
   background-color: $gray-100;
+  display: inline-block;
   .date {
     text-transform: uppercase;
     font-size: $h6-font-size;

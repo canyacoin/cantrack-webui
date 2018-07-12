@@ -31,6 +31,13 @@
   "task-list": {
     "add-task": "Add task"
   },
+  "idle-task": {
+    "the-task": "The task:",
+    "idle-for": "Has been idle for",
+    "add-item": "Would you like to add this time to this task?"
+  },
+  "add": "Add",
+  "no": "No",
   "reset-tasks-and-time": "Reset tasks and time",
   "days": "Days",
   "hours": "Hours",

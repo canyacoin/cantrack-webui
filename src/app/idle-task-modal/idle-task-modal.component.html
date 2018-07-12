@@ -3,13 +3,13 @@
     <div class="row justify-content-center">
       <div class="col-6">
         <div class="modal-body">
-          <h4>The task:</h4>
+          <h4>{{ 'idle-task.the-task' | translate }}</h4>
           <h5 style="border-left: 7px solid;" [style.borderColor]="task.color">&nbsp;&nbsp;{{ task.description }}</h5>
-          <p>Has been idle for {{ [task.idleFrom, now] | datesDifference }}.</p>
-          <p>Would you like to add this time to this task?</p>
+          <p>{{ 'idle-task.idle-for' | translate }} {{ [task.idleFrom, now] | datesDifference }}.</p>
+          <p>{{ 'idle-task.add-item' | translate }}</p>
           <nav>
-            <button class="btn btn-outline btn-primary" (click)="idleTaskService.addTimeToTask()">Add</button>
-            <button class="btn btn-outline btn-danger" (click)="idleTaskService.removeTimeFromTask()">No</button>
+            <button class="btn btn-outline btn-primary" (click)="idleTaskService.addTimeToTask()">{{ 'add' | translate }}</button>
+            <button class="btn btn-outline btn-danger" (click)="idleTaskService.removeTimeFromTask()">{{ 'no' | translate }}</button>
           </nav>
         </div>
       </div>

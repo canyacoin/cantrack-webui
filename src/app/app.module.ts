@@ -20,10 +20,12 @@ import { IdleTaskService } from './idle-task.service';
 import { IdleTaskModalComponent } from './idle-task-modal/idle-task-modal.component';
 import { EthereumService } from './ethereum.service';
 import { PublishTimeDataModalComponent } from './publish-time-data-modal/publish-time-data-modal.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { CustomPipesModule } from './custom-pipes/custom-pipes.module';
 import { ContractDataModule } from './contract-data/contract-data.module';
+
+import { CommonLibModule } from '@canyaio/common-lib';
 
 
 @NgModule({
@@ -47,7 +49,8 @@ import { ContractDataModule } from './contract-data/contract-data.module';
     HttpClientModule,
     AppRoutingModule,
     ContractDataModule,
-    CustomPipesModule
+    CustomPipesModule,
+    CommonLibModule
   ],
   exports: [],
   providers: [

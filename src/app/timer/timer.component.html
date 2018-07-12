@@ -1,13 +1,13 @@
 <header class="global-time">
-  <span class="reset text-right" (click)="globalTimer.reset()"><i class="fa fa-sync"></i> Reset tasks and time</span>
+  <span class="reset text-right" (click)="globalTimer.reset()"><i class="fa fa-sync"></i> {{ 'reset-tasks-and-time' | translate }}</span>
   <div class="timeline-wrapper">
     <div class="counter d-print-block d-none">
       <div class="countdown countdown-sm">
         <div class="row">
-          <div class="col"><h5>{{ globalTimer.counter.days }}</h5><small>Days</small></div>
-          <div class="col"><h5>{{ globalTimer.counter.hours }}</h5><small>Hours</small></div>
-          <div class="col"><h5>{{ globalTimer.counter.minutes }}</h5><small>Minutes</small></div>
-          <div class="col"><h5>{{ globalTimer.counter.seconds }}</h5><small>Seconds</small></div>
+          <div class="col"><h5>{{ globalTimer.counter.days }}</h5><small>{{ 'days' | translate }}</small></div>
+          <div class="col"><h5>{{ globalTimer.counter.hours }}</h5><small>{{ 'hours' | translate }}</small></div>
+          <div class="col"><h5>{{ globalTimer.counter.minutes }}</h5><small>{{ 'minutes' | translate }}</small></div>
+          <div class="col"><h5>{{ globalTimer.counter.seconds }}</h5><small>{{ 'seconds' | translate }}</small></div>
         </div>
       </div>
     </div>

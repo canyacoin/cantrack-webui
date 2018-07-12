@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ContractDataService } from './contract-data/contract-data.service';
+import { PreviewService } from './preview.service';
 
 declare var BancorConvertWidget: any;
 
@@ -15,7 +16,10 @@ export class AppComponent {
 
   isContractViewMode: boolean = false
 
-  constructor(private contractDataService: ContractDataService) {
+  constructor(
+    private contractDataService: ContractDataService,
+    public previewService: PreviewService) {
+
     this.projectName = localStorage.getItem('projectName') ?
                         localStorage.getItem('projectName') :
                         this.projectName;

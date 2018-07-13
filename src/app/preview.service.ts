@@ -20,6 +20,10 @@ export class PreviewService {
     this.isOn.next(false);
   }
 
+  onPrint(){
+    window.print()
+  }
+
   onPreview() {
     this.turnOn();
 
